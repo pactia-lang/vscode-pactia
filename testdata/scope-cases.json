@@ -1,0 +1,260 @@
+{
+  "cases": [
+    {
+      "id": "version-header",
+      "line": "pactia 1.0",
+      "token": "pactia",
+      "include": ["keyword.other.version.pactia"]
+    },
+    {
+      "id": "version-number",
+      "line": "pactia 1.0",
+      "token": "1.0",
+      "include": ["constant.numeric.language-version.pactia"]
+    },
+    {
+      "id": "product-keyword",
+      "line": "product FleetManagement {",
+      "token": "product",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "data-keyword",
+      "line": "    data {",
+      "token": "data",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "prose-line",
+      "line": "  > Platform for tracking vehicles",
+      "token": "Platform for tracking vehicles",
+      "include": ["string.unquoted.prose.pactia"]
+    },
+    {
+      "id": "prose-marker",
+      "line": "  > Platform for tracking vehicles",
+      "token": "> ",
+      "include": ["punctuation.definition.prose.quote.pactia"]
+    },
+    {
+      "id": "single-line-empty-tag",
+      "line": "  @stack rust-anb { }",
+      "token": "stack",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "single-line-empty-tag-target",
+      "line": "  @stack rust-anb { }",
+      "token": "rust-anb",
+      "include": ["entity.name.tag.target.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "clause-tag-no-target",
+      "line": "  @topology {",
+      "token": "topology",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "clause-tag-with-target",
+      "line": "    @actor customers {",
+      "token": "actor",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "clause-tag-target",
+      "line": "    @actor customers {",
+      "token": "customers",
+      "include": ["entity.name.tag.target.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "at-sign",
+      "line": "    @actor customers {",
+      "token": "@",
+      "include": ["punctuation.definition.tag.pactia"]
+    },
+    {
+      "id": "macro-simple",
+      "line": "      #[list]",
+      "token": "list",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "macro-with-params",
+      "line": "      #[rate_limit(1000, rpm)]",
+      "token": "rate_limit",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "macro-param",
+      "line": "      #[rate_limit(1000, rpm)]",
+      "token": "1000, rpm",
+      "include": ["variable.parameter.macro.pactia"]
+    },
+    {
+      "id": "modifier-flag",
+      "line": "        @nullable",
+      "token": "nullable",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "modifier-shorthand-returns",
+      "line": "      @returns VehicleDto",
+      "token": "returns",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "modifier-shorthand-type",
+      "line": "      @returns VehicleDto",
+      "token": "VehicleDto",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "modifier-status-code",
+      "line": "      @status 201",
+      "token": "201",
+      "include": ["constant.numeric.pactia"]
+    },
+    {
+      "id": "inline-auth-body",
+      "line": "      @auth { roles: [Customer, Admin] }",
+      "token": "roles",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "inline-object-field-after-number",
+      "line": "{ status: 404, code: NOT_FOUND, message: \"x\" }",
+      "token": "code",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "inline-object-number",
+      "line": "{ status: 404, code: NOT_FOUND, message: \"x\" }",
+      "token": "404",
+      "include": ["constant.numeric.pactia"]
+    },
+    {
+      "id": "nested-object-key",
+      "line": "      NotFound: {",
+      "token": "NotFound",
+      "include": ["meta.object.key.pactia"]
+    },
+    {
+      "id": "nested-object-field",
+      "line": "        status: 404,",
+      "token": "status",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "http-verb",
+      "line": "    method: GET,",
+      "token": "GET",
+      "include": ["keyword.control.http.pactia"]
+    },
+    {
+      "id": "string-literal",
+      "line": "    path: \"/api/v1/vehicles\",",
+      "token": "/api/v1/vehicles",
+      "include": ["string.quoted.double.pactia"]
+    },
+    {
+      "id": "env-key",
+      "line": "      DATABASE_URL: {",
+      "token": "DATABASE_URL",
+      "include": ["constant.other.env-key.pactia"]
+    },
+    {
+      "id": "primitive-type",
+      "line": "        id: uuid,",
+      "token": "uuid",
+      "include": ["support.type.primitive.pactia"]
+    },
+    {
+      "id": "custom-type",
+      "line": "        status: VehicleStatus,",
+      "token": "VehicleStatus",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "package-import-keyword",
+      "line": "use @pactia/protocol-rest;",
+      "token": "use",
+      "include": ["keyword.control.import.pactia"]
+    },
+    {
+      "id": "package-name",
+      "line": "use @pactia/protocol-rest;",
+      "token": "pactia/protocol-rest",
+      "include": ["entity.name.tag.package.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "define-tag",
+      "line": "define tag sanctions_check {",
+      "token": "define",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "define-tag-kind",
+      "line": "define tag sanctions_check {",
+      "token": "tag",
+      "include": ["keyword.declaration.registry.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "define-macro-keyword",
+      "line": "define macro sanctions_screen {",
+      "token": "define",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "define-registry-kind",
+      "line": "define macro sanctions_screen {",
+      "token": "macro",
+      "include": ["keyword.declaration.registry.pactia"]
+    },
+    {
+      "id": "registry-scope",
+      "line": "  scope endpoint",
+      "token": "scope",
+      "include": ["keyword.declaration.registry.pactia"]
+    },
+    {
+      "id": "registry-scope-value",
+      "line": "  scope endpoint",
+      "token": "endpoint",
+      "include": ["constant.language.scope.pactia"]
+    },
+    {
+      "id": "registry-body",
+      "line": "  body {",
+      "token": "body",
+      "include": ["keyword.declaration.registry.pactia"]
+    },
+    {
+      "id": "line-comment",
+      "line": "// Package source example",
+      "token": "// Package source example",
+      "include": ["comment.line.double-slash.pactia"]
+    },
+    {
+      "id": "boolean-literal",
+      "line": "        required: false,",
+      "token": "false",
+      "include": ["constant.language.boolean.pactia"]
+    },
+    {
+      "id": "throws-inline",
+      "line": "      @throws { names: [NotFound, Forbidden] }",
+      "token": "throws",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "emit-event",
+      "line": "      @emit vehicle.created",
+      "token": "vehicle.created",
+      "include": ["variable.other.event.pactia"]
+    }
+  ]
+}

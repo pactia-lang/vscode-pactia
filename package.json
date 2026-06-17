@@ -1,0 +1,181 @@
+{
+  "name": "pactia",
+  "displayName": "Pactia",
+  "description": "Syntax highlighting for Pactia contract files (.pactia)",
+  "version": "1.0.2",
+  "publisher": "pactia-lang",
+  "license": "MIT",
+  "scripts": {
+    "test:extension": "node scripts/test-extension.mjs",
+    "test:scopes": "node scripts/test-scopes.mjs",
+    "test:fixtures": "node scripts/test-fixtures.mjs",
+    "test:grammar": "node scripts/test-grammar.mjs",
+    "test:markdown": "node scripts/test-markdown.mjs",
+    "test": "node scripts/run-tests.mjs",
+    "package": "npx --yes @vscode/vsce package --no-dependencies",
+    "install:extension": "./scripts/install-extension.sh"
+  },
+  "devDependencies": {
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.1.0"
+  },
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "pactia",
+        "aliases": [
+          "Pactia",
+          "pactia"
+        ],
+        "extensions": [
+          ".pactia"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "pactia",
+        "scopeName": "source.pactia",
+        "path": "./syntaxes/pactia.tmLanguage.json"
+      },
+      {
+        "scopeName": "markdown.pactia.codeblock",
+        "path": "./syntaxes/pactia.markdown.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.pactia": "pactia"
+        }
+      }
+    ],
+    "configurationDefaults": {
+      "editor.tokenColorCustomizations": {
+        "[pactia]": {
+          "textMateRules": [
+            {
+              "scope": [
+                "entity.name.tag.clause.pactia",
+                "punctuation.definition.tag.pactia"
+              ],
+              "settings": {
+                "foreground": "#DCDCAA",
+                "fontStyle": "bold"
+              }
+            },
+            {
+              "scope": [
+                "string.unquoted.prose.pactia"
+              ],
+              "settings": {
+                "foreground": "#C586C0",
+                "fontStyle": "italic"
+              }
+            },
+            {
+              "scope": [
+                "punctuation.definition.prose.quote.pactia"
+              ],
+              "settings": {
+                "foreground": "#6A9955"
+              }
+            },
+            {
+              "scope": [
+                "keyword.declaration.pactia"
+              ],
+              "settings": {
+                "foreground": "#569CD6"
+              }
+            },
+            {
+              "scope": [
+                "keyword.declaration.registry.pactia",
+                "keyword.control.import.pactia"
+              ],
+              "settings": {
+                "foreground": "#569CD6"
+              }
+            },
+            {
+              "scope": [
+                "constant.language.scope.pactia",
+                "constant.language.category.pactia"
+              ],
+              "settings": {
+                "foreground": "#DCDCAA"
+              }
+            },
+            {
+              "scope": [
+                "keyword.other.assignment.pactia",
+                "meta.object.key.pactia"
+              ],
+              "settings": {
+                "foreground": "#9CDCFE"
+              }
+            },
+            {
+              "scope": [
+                "constant.numeric.pactia",
+                "constant.numeric.language-version.pactia",
+                "constant.numeric.semver-range.pactia"
+              ],
+              "settings": {
+                "foreground": "#B5CEA8"
+              }
+            },
+            {
+              "scope": [
+                "support.type.primitive.pactia",
+                "constant.language.boolean.pactia"
+              ],
+              "settings": {
+                "foreground": "#569CD6"
+              }
+            },
+            {
+              "scope": [
+                "constant.other.env-key.pactia"
+              ],
+              "settings": {
+                "foreground": "#DCDCAA"
+              }
+            },
+            {
+              "scope": [
+                "punctuation.section.block.begin.pactia",
+                "punctuation.section.block.end.pactia",
+                "punctuation.section.braces.begin.pactia",
+                "punctuation.section.braces.end.pactia"
+              ],
+              "settings": {
+                "foreground": "#FFD700"
+              }
+            },
+            {
+              "scope": [
+                "keyword.control.http.pactia"
+              ],
+              "settings": {
+                "foreground": "#DCDCAA"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pactia-lang/vscode-pactia.git"
+  }
+}
