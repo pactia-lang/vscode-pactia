@@ -65,7 +65,7 @@ Default colors for `.pactia` files (dark themes):
 | **Prose** `>` prefix | Green | `punctuation.definition.prose.quote.pactia` |
 | **Kernel keywords** (9) | Blue | `keyword.declaration.pactia` |
 | **Registry headers** `scope`, `body`, `lowers`, `expands` | Blue | `keyword.declaration.registry.pactia` |
-| **Imports** `use`, `as`, `self` | Blue | `keyword.control.import.pactia` |
+| **Imports** `import`, `from`, `as` | Blue | `keyword.control.import.pactia` |
 | **HTTP** `GET`/`POST` | Yellow | `keyword.control.http.pactia` |
 | **Braces** `{` `}` | Gold | `punctuation.section.*.pactia` |
 
@@ -75,13 +75,13 @@ Reload after updating (`Developer: Reload Window`). Confirm language mode is **P
 
 | Construct | Examples |
 | --- | --- |
-| **Nine kernel keywords** | `pactia`, `product`, `module`, `service`, `data`, `use`, `import`, `define`, `yaml` |
+| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `data`, `import`, `export`, `define`, `yaml` |
 | **Three line kinds** | `@tag { }`, `#[macro]`, `> prose` |
 | **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@actor customers { }` |
 | **Modifier flags** | `@pk`, `@public`, `@pii`, `@optional` |
 | **Modifier shorthand** | `@returns VehicleDto`, `@status 201`, `@emit vehicle.created` |
 | **Macros** | `#[list]`, `#[database]`, `#[rate_limit(1000, rpm)]`, `#[alias::macro]` |
-| **Package imports** | `use @scope/name;`, `use @pkg::{a, b};`, `use @pkg as alias;`, `use @pkg::*;` |
+| **Package imports** | `import @scope/name;`, `import { a, b } from @pkg;`, `import @pkg as alias;`, `import * from @pkg;` |
 | **Qualified symbols** | `@alias::tag { }`, `#[alias::macro]` |
 | **define template** | `define template fleet_list(path, Dto) { }` |
 | **define tag / macro** | `scope`, `body { }`, `lowers { }`, `expands { }` |

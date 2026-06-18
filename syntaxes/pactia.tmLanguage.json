@@ -318,7 +318,7 @@
     "define-headers": {
       "patterns": [
         {
-          "match": "^(\\s*)\\b(define)\\s+(macro|tag|template)\\s+([\\w]+)(?:\\([^)]*\\))?(?=\\s*\\{)",
+          "match": "^(\\s*)\\b(?:export\\s+)?(define)\\s+(macro|tag|template)\\s+([\\w]+)(?:\\([^)]*\\))?(?=\\s*\\{)",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
             "3": { "name": "keyword.declaration.registry.pactia" },
@@ -330,7 +330,7 @@
     "define-macro-tag": {
       "patterns": [
         {
-          "begin": "^(\\s*)\\b(define)\\s+(macro|tag|template)\\s+([\\w]+)(?:\\([^)]*\\))?\\s*\\{\\s*$",
+          "begin": "^(\\s*)\\b(?:export\\s+)?(define)\\s+(macro|tag|template)\\s+([\\w]+)(?:\\([^)]*\\))?\\s*\\{\\s*$",
           "beginCaptures": {
             "2": { "name": "keyword.declaration.pactia" },
             "3": { "name": "keyword.declaration.registry.pactia" },
@@ -349,29 +349,21 @@
     "package-imports": {
       "patterns": [
         {
-          "match": "\\b(use|import)\\b",
+          "match": "\\b(import|from|as)\\b",
           "name": "keyword.control.import.pactia"
         },
         {
-          "match": "\\b(as|self)\\b",
-          "name": "keyword.control.import.pactia"
-        },
-        {
-          "match": "(@)([\\w-]+/[\\w-]+)(::)(\\*)(?=\\s*;)",
+          "match": "(\\{)([^}]*)(\\})\\s+from",
           "captures": {
-            "1": { "name": "punctuation.definition.tag.pactia" },
-            "2": { "name": "entity.name.tag.package.pactia" },
-            "3": { "name": "punctuation.separator.namespace.pactia" },
-            "4": { "name": "keyword.control.import.pactia" }
+            "1": { "name": "punctuation.section.braces.begin.pactia" },
+            "2": { "name": "meta.import.list.pactia" },
+            "3": { "name": "punctuation.section.braces.end.pactia" }
           }
         },
         {
-          "match": "(@)([\\w-]+/[\\w-]+)(::)([\\w]+)",
+          "match": "\\*\\s+from",
           "captures": {
-            "1": { "name": "punctuation.definition.tag.pactia" },
-            "2": { "name": "entity.name.tag.package.pactia" },
-            "3": { "name": "punctuation.separator.namespace.pactia" },
-            "4": { "name": "entity.name.import.symbol.pactia" }
+            "0": { "name": "keyword.control.import.pactia" }
           }
         },
         {
@@ -379,15 +371,6 @@
           "name": "entity.name.tag.package.pactia",
           "captures": {
             "1": { "name": "punctuation.definition.tag.pactia" }
-          }
-        },
-        {
-          "match": "(::)(\\{)([^}]*)(\\})",
-          "captures": {
-            "1": { "name": "punctuation.separator.namespace.pactia" },
-            "2": { "name": "punctuation.section.braces.begin.pactia" },
-            "3": { "name": "meta.import.list.pactia" },
-            "4": { "name": "punctuation.section.braces.end.pactia" }
           }
         },
         {
@@ -421,7 +404,7 @@
           }
         },
         {
-          "match": "\\b(pactia|product|module|service|data|use|import|define|yaml)\\b",
+          "match": "\\b(pactia|product|module|service|data|import|export|define|yaml)\\b",
           "name": "keyword.declaration.pactia"
         },
         {
