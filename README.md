@@ -2,7 +2,7 @@
 
 Syntax highlighting for `.pactia` files and ` ```pactia ` fences in Markdown — [Pactia spec 1.0](https://github.com/pactia-lang/spec).
 
-Spec: [language-spec](https://github.com/pactia-lang/spec/blob/main/docs/language-spec.md) | [editor-support](https://github.com/pactia-lang/spec/blob/main/docs/editor-support.md) | [registry](https://github.com/pactia-lang/spec/blob/main/docs/registry.md)
+Spec: [language-spec](https://github.com/pactia-lang/spec/blob/main/docs/language-spec.md) | [editor-support](https://github.com/pactia-lang/spec/blob/main/docs/editor-support.md) | [registry](https://github.com/pactia-lang/spec/blob/main/docs/registry.md) | [CHANGELOG](CHANGELOG.md)
 
 ## Install
 
