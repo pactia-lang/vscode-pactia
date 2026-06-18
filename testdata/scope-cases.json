@@ -178,13 +178,13 @@
     },
     {
       "id": "package-import-keyword",
-      "line": "use @pactia/protocol-rest;",
-      "token": "use",
+      "line": "import @pactia/protocol-rest;",
+      "token": "import",
       "include": ["keyword.control.import.pactia"]
     },
     {
       "id": "package-name",
-      "line": "use @pactia/protocol-rest;",
+      "line": "import @pactia/protocol-rest;",
       "token": "pactia/protocol-rest",
       "include": ["entity.name.tag.package.pactia"],
       "exclude": ["entity.name.tag.clause.pactia"]

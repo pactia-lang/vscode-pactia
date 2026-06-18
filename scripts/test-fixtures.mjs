@@ -39,9 +39,9 @@ const requiredScopesPerFile = {
 
 const clauseTagLine =
   /^(\s*)@([a-z][a-z0-9_]*)(?:\s+([\w.-]+))?\s*(\{\s*\}\s*|\{\s*)$/;
-const packageImportLine = /^\s*use\s+@/;
+const packageImportLine = /^\s*import\s+(@|\{|\*)/;
 const proseLine = /^\s*>\s+/;
-const defineLine = /^\s*define\s+(tag|macro|template)\s+/;
+const defineLine = /^\s*(?:export\s+)?define\s+(tag|macro|template)\s+/;
 const macroLine = /#\[/;
 
 function fixtureKind(fixtureId) {
@@ -136,7 +136,7 @@ export async function runFixtureTests() {
           failed += 1;
         }
 
-        const kindMatch = line.match(/^\s*define\s+(tag|macro|template)\s+/);
+        const kindMatch = line.match(/^\s*(?:export\s+)?define\s+(tag|macro|template)\s+/);
         if (kindMatch) {
           const kindToken = findTokenByExactText(grammar, line, kindMatch[1]);
           if (!kindToken?.scopes.includes("keyword.declaration.registry.pactia")) {
