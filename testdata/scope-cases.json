@@ -19,9 +19,9 @@
       "include": ["keyword.declaration.pactia"]
     },
     {
-      "id": "data-keyword",
-      "line": "    data {",
-      "token": "data",
+      "id": "model-keyword",
+      "line": "    model {",
+      "token": "model",
       "include": ["keyword.declaration.pactia"]
     },
     {

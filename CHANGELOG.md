@@ -8,6 +8,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 
+- **Kernel keyword:** highlight `model` instead of `data` for domain modeling blocks.
 - **Import & export syntax:** highlight `import` (replaces `use`), `export`, and import tokens `from` / `as`.
 - Grammar supports `export define tag` / `export define macro` in package fixtures.
 - Vendored fixtures synced with [spec](https://github.com/pactia-lang/spec) import/export changes.

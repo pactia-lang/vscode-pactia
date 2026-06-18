@@ -117,7 +117,7 @@
       ]
     },
     "multiline-blocks": {
-      "begin": "^(\\s*)(?:(product|module|service)\\s+(\\w+)|(data)|(@)(?:(\\w+)::)?(\\w+)(?:\\s+([\\w.-]+))?)\\s*\\{\\s*$",
+      "begin": "^(\\s*)(?:(product|module|service)\\s+(\\w+)|(model)|(@)(?:(\\w+)::)?(\\w+)(?:\\s+([\\w.-]+))?)\\s*\\{\\s*$",
       "beginCaptures": {
         "2": { "name": "keyword.declaration.pactia" },
         "3": { "name": "entity.name.type.pactia" },
@@ -404,7 +404,7 @@
           }
         },
         {
-          "match": "\\b(pactia|product|module|service|data|import|export|define|yaml)\\b",
+          "match": "\\b(pactia|product|module|service|model|import|export|define|yaml)\\b",
           "name": "keyword.declaration.pactia"
         },
         {

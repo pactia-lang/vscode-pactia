@@ -75,7 +75,7 @@ Reload after updating (`Developer: Reload Window`). Confirm language mode is **P
 
 | Construct | Examples |
 | --- | --- |
-| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `data`, `import`, `export`, `define`, `yaml` |
+| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `import`, `export`, `define`, `yaml` |
 | **Three line kinds** | `@tag { }`, `#[macro]`, `> prose` |
 | **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@actor customers { }` |
 | **Modifier flags** | `@pk`, `@public`, `@pii`, `@optional` |
