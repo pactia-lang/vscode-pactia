@@ -38,14 +38,14 @@
     },
     {
       "id": "single-line-empty-tag",
-      "line": "  @stack rust-anb { }",
+      "line": "  @stack rust-stack { }",
       "token": "stack",
       "include": ["entity.name.tag.clause.pactia"]
     },
     {
       "id": "single-line-empty-tag-target",
-      "line": "  @stack rust-anb { }",
-      "token": "rust-anb",
+      "line": "  @stack rust-stack { }",
+      "token": "rust-stack",
       "include": ["entity.name.tag.target.pactia"],
       "exclude": ["entity.name.tag.clause.pactia"]
     },
@@ -75,22 +75,46 @@
       "include": ["punctuation.definition.tag.pactia"]
     },
     {
-      "id": "macro-simple",
+      "id": "macro-invoke",
+      "line": "  #rust-stack",
+      "token": "rust-stack",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "macro-invoke-with-args",
+      "line": "  #rate_limit(1000, rpm)",
+      "token": "rate_limit",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "legacy-macro-simple",
       "line": "      #[list]",
       "token": "list",
       "include": ["entity.name.function.macro.pactia"]
     },
     {
-      "id": "macro-with-params",
+      "id": "legacy-macro-with-params",
       "line": "      #[rate_limit(1000, rpm)]",
       "token": "rate_limit",
       "include": ["entity.name.function.macro.pactia"]
     },
     {
-      "id": "macro-param",
+      "id": "legacy-macro-param",
       "line": "      #[rate_limit(1000, rpm)]",
       "token": "1000, rpm",
       "include": ["variable.parameter.macro.pactia"]
+    },
+    {
+      "id": "modifier-tag",
+      "line": "        @@nullable",
+      "token": "nullable",
+      "include": ["entity.name.tag.modifier.pactia"]
+    },
+    {
+      "id": "modifier-tag-with-arg",
+      "line": "      @@output OrderListResponse",
+      "token": "output",
+      "include": ["entity.name.tag.modifier.pactia"]
     },
     {
       "id": "modifier-flag",
@@ -99,14 +123,20 @@
       "include": ["entity.name.tag.clause.pactia"]
     },
     {
-      "id": "modifier-shorthand-returns",
-      "line": "      @returns VehicleDto",
-      "token": "returns",
+      "id": "host-tag-prefix",
+      "line": "      @auth Customer",
+      "token": "auth",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "modifier-shorthand-output",
+      "line": "      @output VehicleDto",
+      "token": "output",
       "include": ["entity.name.tag.clause.pactia"]
     },
     {
       "id": "modifier-shorthand-type",
-      "line": "      @returns VehicleDto",
+      "line": "      @output VehicleDto",
       "token": "VehicleDto",
       "include": ["entity.name.type.pactia"]
     },
@@ -178,59 +208,118 @@
     },
     {
       "id": "package-import-keyword",
-      "line": "import @pactia/protocol-rest;",
+      "line": "import @pactia/rust-stack;",
       "token": "import",
       "include": ["keyword.control.import.pactia"]
     },
     {
       "id": "package-name",
-      "line": "import @pactia/protocol-rest;",
-      "token": "pactia/protocol-rest",
+      "line": "import @pactia/rust-stack;",
+      "token": "pactia/rust-stack",
       "include": ["entity.name.tag.package.pactia"],
       "exclude": ["entity.name.tag.clause.pactia"]
     },
     {
-      "id": "define-tag",
-      "line": "define tag sanctions_check {",
-      "token": "define",
+      "id": "partial-import-from",
+      "line": "import { @api, @@output, #database } from @pactia/kernel;",
+      "token": "from",
+      "include": ["keyword.control.import.pactia"]
+    },
+    {
+      "id": "partial-import-tag",
+      "line": "import { @api, @@output, #database } from @pactia/kernel;",
+      "token": "api",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "partial-import-modifier",
+      "line": "import { @api, @@output, #database } from @pactia/kernel;",
+      "token": "output",
+      "include": ["entity.name.tag.modifier.pactia"]
+    },
+    {
+      "id": "attach-module",
+      "line": "  module(catalog) {",
+      "token": "catalog",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "attach-model",
+      "line": "      model(catalog_model)",
+      "token": "catalog_model",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "def-keyword",
+      "line": "export def @sanctions_check in service {",
+      "token": "def",
       "include": ["keyword.declaration.pactia"]
     },
     {
-      "id": "define-tag-kind",
-      "line": "define tag sanctions_check {",
-      "token": "tag",
-      "include": ["keyword.declaration.registry.pactia"],
-      "exclude": ["entity.name.tag.clause.pactia"]
+      "id": "def-tag-sigil",
+      "line": "export def @sanctions_check in service {",
+      "token": "@",
+      "include": ["punctuation.definition.def-sigil.pactia"]
     },
     {
-      "id": "define-macro-keyword",
-      "line": "define macro sanctions_screen {",
-      "token": "define",
+      "id": "def-tag-name",
+      "line": "export def @sanctions_check in service {",
+      "token": "sanctions_check",
+      "include": ["entity.name.tag.def.pactia"]
+    },
+    {
+      "id": "def-modifier-sigil",
+      "line": "export def @@output in service {",
+      "token": "@@",
+      "include": ["punctuation.definition.def-sigil.pactia"]
+    },
+    {
+      "id": "def-macro-sigil",
+      "line": "export def #sanctions_screen in service {",
+      "token": "#",
+      "include": ["punctuation.definition.def-sigil.pactia"]
+    },
+    {
+      "id": "def-macro-name",
+      "line": "export def #sanctions_screen in service {",
+      "token": "sanctions_screen",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "def-in-keyword",
+      "line": "export def @sanctions_check in service {",
+      "token": "in",
       "include": ["keyword.declaration.pactia"]
     },
     {
-      "id": "define-registry-kind",
-      "line": "define macro sanctions_screen {",
-      "token": "macro",
-      "include": ["keyword.declaration.registry.pactia"]
+      "id": "def-in-placement",
+      "line": "export def @sanctions_check in service {",
+      "token": "service",
+      "include": ["constant.language.placement.pactia"]
     },
     {
-      "id": "registry-scope",
-      "line": "  scope endpoint",
-      "token": "scope",
-      "include": ["keyword.declaration.registry.pactia"]
+      "id": "def-modifier-spec",
+      "line": "  modifier,",
+      "token": "modifier",
+      "include": ["constant.language.def-spec.pactia"]
     },
     {
-      "id": "registry-scope-value",
-      "line": "  scope endpoint",
-      "token": "endpoint",
-      "include": ["constant.language.scope.pactia"]
+      "id": "module-constant-def",
+      "line": "  def max_page = 100",
+      "token": "def",
+      "include": ["keyword.declaration.pactia"]
     },
     {
-      "id": "registry-body",
-      "line": "  body {",
-      "token": "body",
-      "include": ["keyword.declaration.registry.pactia"]
+      "id": "module-constant-name",
+      "line": "  def max_page = 100",
+      "token": "max_page",
+      "include": ["variable.other.constant.pactia"]
+    },
+    {
+      "id": "interpolation",
+      "line": "  > Use ${max_page} items per page.",
+      "token": "max_page",
+      "include": ["variable.other.interpolation.pactia"]
     },
     {
       "id": "line-comment",

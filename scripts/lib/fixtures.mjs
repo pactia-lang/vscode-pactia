@@ -7,14 +7,14 @@ const fixtureCandidates = [
     id: "kernel",
     paths: [
       "testdata/fixtures/kernel/fleet-management-v2.pactia",
-      "../spec/fixtures/kernel/fleet-management-v2.pactia",
+      "../pactiac/test/fixtures/kernel/relay.pactia",
     ],
   },
   {
     id: "package",
     paths: [
       "testdata/fixtures/packages/fintech-rules-index.pactia",
-      "../spec/fixtures/packages/fintech-rules-index.pactia",
+      "../pactiac/test/fixtures/packages/fintech-rules-index.pactia",
     ],
   },
   {

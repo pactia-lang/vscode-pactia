@@ -15,7 +15,7 @@ const maxStackDepth = 20;
 const requiredScopesPerFile = {
   kernel: [
     "entity.name.tag.clause.pactia",
-    "entity.name.tag.target.pactia",
+    "entity.name.tag.modifier.pactia",
     "entity.name.function.macro.pactia",
     "keyword.declaration.pactia",
     "keyword.other.assignment.pactia",
@@ -24,13 +24,13 @@ const requiredScopesPerFile = {
     "constant.numeric.pactia",
     "keyword.control.http.pactia",
     "entity.name.type.pactia",
-    "constant.other.env-key.pactia",
     "meta.object.key.pactia",
   ],
   package: [
     "keyword.declaration.pactia",
-    "keyword.declaration.registry.pactia",
-    "constant.language.scope.pactia",
+    "punctuation.definition.def-sigil.pactia",
+    "entity.name.tag.def.pactia",
+    "constant.language.placement.pactia",
     "entity.name.function.macro.pactia",
     "comment.line.double-slash.pactia",
     "string.unquoted.prose.pactia",
@@ -41,8 +41,9 @@ const clauseTagLine =
   /^(\s*)@([a-z][a-z0-9_]*)(?:\s+([\w.-]+))?\s*(\{\s*\}\s*|\{\s*)$/;
 const packageImportLine = /^\s*import\s+(@|\{|\*)/;
 const proseLine = /^\s*>\s+/;
-const defineLine = /^\s*(?:export\s+)?define\s+(tag|macro|template)\s+/;
-const macroLine = /#\[/;
+const defLine = /^\s*(?:export\s+)?def\s+(@@|@|#)/;
+const legacyMacroLine = /#\[/;
+const macroInvokeLine = /^\s*#[\w-]+/;
 
 function fixtureKind(fixtureId) {
   if (fixtureId === "package") {
@@ -89,6 +90,43 @@ function checkClauseTagLine(grammar, line, lineNumber, fileLabel) {
   return failed;
 }
 
+function checkMacroLine(grammar, line, lineNumber, fileLabel) {
+  let failed = 0;
+
+  if (legacyMacroLine.test(line)) {
+    const macroMatch = line.match(/#\[([\w]+)/);
+    if (macroMatch) {
+      const macroToken = findTokenByExactText(grammar, line, macroMatch[1]);
+      if (!macroToken?.scopes.includes("entity.name.function.macro.pactia")) {
+        console.error(
+          `FAIL: ${fileLabel}:${lineNumber} — legacy macro ${macroMatch[1]} missing entity.name.function.macro.pactia`,
+        );
+        failed += 1;
+      }
+    }
+    return failed;
+  }
+
+  if (!macroInvokeLine.test(line)) {
+    return failed;
+  }
+
+  const macroMatch = line.match(/^(\s*)#([\w-]+)/);
+  if (!macroMatch) {
+    return failed;
+  }
+
+  const macroToken = findTokenByExactText(grammar, line, macroMatch[2]);
+  if (!macroToken?.scopes.includes("entity.name.function.macro.pactia")) {
+    console.error(
+      `FAIL: ${fileLabel}:${lineNumber} — macro ${macroMatch[2]} missing entity.name.function.macro.pactia`,
+    );
+    failed += 1;
+  }
+
+  return failed;
+}
+
 export async function runFixtureTests() {
   const grammar = await createPactiaGrammar();
   let failed = 0;
@@ -127,39 +165,30 @@ export async function runFixtureTests() {
     for (const { lineNumber, line } of result.lineResults) {
       failed += checkClauseTagLine(grammar, line, lineNumber, rel);
 
-      if (defineLine.test(line)) {
-        const defineToken = findTokenByExactText(grammar, line, "define");
-        if (!defineToken?.scopes.includes("keyword.declaration.pactia")) {
+      if (defLine.test(line)) {
+        const defToken = findTokenByExactText(grammar, line, "def");
+        if (!defToken?.scopes.includes("keyword.declaration.pactia")) {
           console.error(
-            `FAIL: ${rel}:${lineNumber} — define missing keyword.declaration.pactia`,
+            `FAIL: ${rel}:${lineNumber} — def missing keyword.declaration.pactia`,
           );
           failed += 1;
         }
 
-        const kindMatch = line.match(/^\s*(?:export\s+)?define\s+(tag|macro|template)\s+/);
-        if (kindMatch) {
-          const kindToken = findTokenByExactText(grammar, line, kindMatch[1]);
-          if (!kindToken?.scopes.includes("keyword.declaration.registry.pactia")) {
+        const sigilMatch = line.match(/def\s+(@@|@|#)/);
+        if (sigilMatch) {
+          const sigilToken = findTokenByExactText(grammar, line, sigilMatch[1]);
+          if (
+            !sigilToken?.scopes.includes("punctuation.definition.def-sigil.pactia")
+          ) {
             console.error(
-              `FAIL: ${rel}:${lineNumber} — ${kindMatch[1]} missing keyword.declaration.registry.pactia`,
+              `FAIL: ${rel}:${lineNumber} — sigil ${sigilMatch[1]} missing punctuation.definition.def-sigil.pactia`,
             );
             failed += 1;
           }
         }
       }
 
-      if (macroLine.test(line)) {
-        const macroMatch = line.match(/#\[([\w]+)/);
-        if (macroMatch) {
-          const macroToken = findTokenByExactText(grammar, line, macroMatch[1]);
-          if (!macroToken?.scopes.includes("entity.name.function.macro.pactia")) {
-            console.error(
-              `FAIL: ${rel}:${lineNumber} — macro ${macroMatch[1]} missing entity.name.function.macro.pactia`,
-            );
-            failed += 1;
-          }
-        }
-      }
+      failed += checkMacroLine(grammar, line, lineNumber, rel);
 
       if (proseLine.test(line)) {
         const hasProse = result.lineResults

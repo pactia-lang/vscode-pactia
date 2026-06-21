@@ -11,7 +11,7 @@ pactia 1.0
 
 product MyApp {
   > Never commit secrets.
-  @stack rust-anb { }
+  @stack rust-stack { }
   @api list_vehicles {
     method: GET,
     path: "/api/v1/vehicles",
@@ -63,7 +63,9 @@ export async function runMarkdownTests() {
   console.log("pactia scopes in fence:", [...pactiaScopes].sort().join(", "));
 
   if (missing.length > 0) {
-    console.error(`FAIL: missing scopes in markdown fence: ${missing.join(", ")}`);
+    console.error(
+      `FAIL: missing scopes in markdown fence: ${missing.join(", ")}`,
+    );
     failed += missing.length;
   }
 
