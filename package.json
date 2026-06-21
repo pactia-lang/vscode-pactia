@@ -2,7 +2,7 @@
   "name": "pactia",
   "displayName": "Pactia",
   "description": "Syntax highlighting for Pactia contract files (.pactia)",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "publisher": "pactia-lang",
   "license": "MIT",
   "scripts": {
@@ -64,7 +64,9 @@
             {
               "scope": [
                 "entity.name.tag.clause.pactia",
-                "punctuation.definition.tag.pactia"
+                "entity.name.tag.modifier.pactia",
+                "punctuation.definition.tag.pactia",
+                "punctuation.definition.modifier.pactia"
               ],
               "settings": {
                 "foreground": "#DCDCAA",
@@ -98,8 +100,8 @@
             },
             {
               "scope": [
-                "keyword.declaration.registry.pactia",
-                "keyword.control.import.pactia"
+                "keyword.control.import.pactia",
+                "punctuation.definition.def-sigil.pactia"
               ],
               "settings": {
                 "foreground": "#569CD6"
@@ -107,8 +109,9 @@
             },
             {
               "scope": [
-                "constant.language.scope.pactia",
-                "constant.language.category.pactia"
+                "constant.language.placement.pactia",
+                "constant.language.def-spec.pactia",
+                "variable.other.interpolation.pactia"
               ],
               "settings": {
                 "foreground": "#DCDCAA"

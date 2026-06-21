@@ -1,6 +1,6 @@
 # Pactia — Cursor / VS Code extension
 
-Syntax highlighting for `.pactia` files and ` ```pactia ` fences in Markdown — [Pactia spec 1.0](https://github.com/pactia-lang/spec).
+Syntax highlighting for `.pactia` files and ` ```pactia ` fences in Markdown — [Pactia spec 1.2](https://github.com/pactia-lang/spec).
 
 Spec: [language-spec](https://github.com/pactia-lang/spec/blob/main/docs/language-spec.md) | [editor-support](https://github.com/pactia-lang/spec/blob/main/docs/editor-support.md) | [registry](https://github.com/pactia-lang/spec/blob/main/docs/registry.md) | [CHANGELOG](CHANGELOG.md)
 
@@ -46,10 +46,10 @@ product MyApp {
 
 GitHub.com does not highlight `pactia` fences until [Linguist](https://github.com/github-linguist/linguist) adds the language; local preview relies on this extension.
 
-Grammar tests use vendored copies under `testdata/fixtures/` (synced from [pactia-lang/spec](https://github.com/pactia-lang/spec) fixtures). In a monorepo layout, tests fall back to `../spec` and `../examples` when present.
+Grammar tests use vendored copies under `testdata/fixtures/`, with fallbacks to [pactiac test/fixtures](https://github.com/pactia-lang/pactiac/tree/main/test/fixtures) in a monorepo layout.
 
-- `testdata/fixtures/kernel/fleet-management-v2.pactia` — kernel product reference
-- `testdata/fixtures/packages/fintech-rules-index.pactia` — package `define tag` / `define macro`
+- `testdata/fixtures/kernel/fleet-management-v2.pactia` — kernel product reference (synced from pactiac `relay.pactia`)
+- `testdata/fixtures/packages/fintech-rules-index.pactia` — package `export def @` / `export def #`
 - `testdata/fixtures/single-file/fleet-management-v2.pactia` — single-file layout
 
 ## Token colors (built-in)
@@ -59,45 +59,46 @@ Default colors for `.pactia` files (dark themes):
 | Element | Color | Scope |
 | --- | --- | --- |
 | **Clause tags** `@actor`, `@api` | Yellow, bold (`@` + tag name) | `entity.name.tag.clause.pactia` |
+| **Modifier tags** `@@output`, `@@pk` | Yellow, bold (`@@` + name) | `entity.name.tag.modifier.pactia` |
 | **Tag targets** `customers`, `Vehicle` | Theme default | `entity.name.tag.target.pactia` |
-| **Macros** `#[list]` | Theme default (Rust-like) | `entity.name.function.macro.pactia` |
+| **Macros** `#list`, `#[list]` (legacy) | Theme default (Rust-like) | `entity.name.function.macro.pactia` |
 | **Prose** `>` lines | Purple, italic | `string.unquoted.prose.pactia` |
 | **Prose** `>` prefix | Green | `punctuation.definition.prose.quote.pactia` |
-| **Kernel keywords** (9) | Blue | `keyword.declaration.pactia` |
-| **Registry headers** `scope`, `body`, `lowers`, `expands` | Blue | `keyword.declaration.registry.pactia` |
-| **Imports** `import`, `from`, `as` | Blue | `keyword.control.import.pactia` |
+| **Kernel keywords** | Blue | `keyword.declaration.pactia` |
+| **Def sigils / imports** `@`, `@@`, `#`, `from` | Blue | `punctuation.definition.def-sigil.pactia`, `keyword.control.import.pactia` |
+| **Placement / def spec** `in service`, `modifier,` | Gold | `constant.language.placement.pactia`, `constant.language.def-spec.pactia` |
 | **HTTP** `GET`/`POST` | Yellow | `keyword.control.http.pactia` |
 | **Braces** `{` `}` | Gold | `punctuation.section.*.pactia` |
 
 Reload after updating (`Developer: Reload Window`). Confirm language mode is **Pactia** in the status bar.
 
-## Grammar coverage (spec 1.0)
+## Grammar coverage (spec 1.2)
 
 | Construct | Examples |
 | --- | --- |
-| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `import`, `export`, `define`, `yaml` |
-| **Three line kinds** | `@tag { }`, `#[macro]`, `> prose` |
-| **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@actor customers { }` |
+| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `import`, `export`, `def`, `in` |
+| **Three line kinds** | `@tag { }`, `@@modifier`, `#macro`, `> prose` |
+| **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@auth Customer` |
+| **Modifier tags** | `@@output VehicleDto`, `@@pk`, `@@nullable` |
 | **Modifier flags** | `@pk`, `@public`, `@pii`, `@optional` |
-| **Modifier shorthand** | `@returns VehicleDto`, `@status 201`, `@emit vehicle.created` |
-| **Macros** | `#[list]`, `#[database]`, `#[rate_limit(1000, rpm)]`, `#[alias::macro]` |
-| **Package imports** | `import @scope/name;`, `import { a, b } from @pkg;`, `import @pkg as alias;`, `import * from @pkg;` |
-| **Qualified symbols** | `@alias::tag { }`, `#[alias::macro]` |
-| **define template** | `define template fleet_list(path, Dto) { }` |
-| **define tag / macro** | `scope`, `body { }`, `lowers { }`, `expands { }` |
+| **Modifier shorthand** | `@output VehicleDto`, `@status 201`, `@emit vehicle.created` |
+| **Macros** | `#list`, `#rate_limit(1000, rpm)`, legacy `#[list]` |
+| **Package imports** | `import @scope/name;`, `import { @api, @@output, #database } from @pkg;` |
+| **Attach syntax** | `module(catalog) { service(CatalogService) { model(catalog_model) } }` |
+| **export def** | `export def @name in service { }`, `export def @@name in field { }`, `export def #name in service { }` |
+| **Module constants** | `def max_page = 100` |
+| **Prose / interpolation** | `> line`, `>> block >>`, `${max_page}` |
 | **Inline objects** | `{ service: FleetService, metric: error_rate }` |
 
 ## Not highlighted as kernel keywords
 
-- `template`, `macro`, `tag` — registry sub-keywords after `define` only
-- `scope`, `body`, `lowers`, `expands`, `category` — package registry block headers only
-- Macro names (`list`, `owner`, …) — `entity.name.function.macro`, not keywords
+- Macro/tag/modifier names (`list`, `output`, `auth`, …) — scoped as tag/macro entities, not keywords
 - `on`, `when`, `then` in prose — plain text unless inside structured tag fields
 
 ## Keeping grammar in sync
 
 1. Update [pactia-lang/spec](https://github.com/pactia-lang/spec) docs and fixtures
-2. Refresh `testdata/fixtures/` copies when spec fixtures change
+2. Refresh `testdata/fixtures/` when pactiac canonical fixtures change
 3. Edit `syntaxes/pactia.tmLanguage.json` (and `pactia.markdown.tmLanguage.json` if fence behavior changes)
 3. Run `npm test`
 4. Run `npm run install:extension` and reload window
@@ -106,6 +107,7 @@ Reload after updating (`Developer: Reload Window`). Confirm language mode is **P
 
 | Version | Feature |
 | --- | --- |
+| 1.2.0 | Spec 1.2 grammar — `def @`/`@@`/`#`, attach syntax, partial imports, `#macro` invoke |
 | 1.0.2 | Clause tag colors, single-line `@stack`, comprehensive grammar tests |
 | 1.0.1 | Markdown ` ```pactia ` fence injection |
 | 1.0 | Spec 1.0 grammar — registry blocks, qualified imports, package authoring |
