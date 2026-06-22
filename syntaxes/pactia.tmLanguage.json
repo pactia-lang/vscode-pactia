@@ -79,6 +79,34 @@
         { "include": "#numbers" }
       ]
     },
+    "inline-block-content": {
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#interpolation" },
+        { "include": "#inline-prose" },
+        { "include": "#strings" },
+        { "include": "#qualified-references" },
+        { "include": "#package-imports" },
+        { "include": "#keywords" },
+        { "include": "#assignment-keys" },
+        { "include": "#types" },
+        { "include": "#numbers" }
+      ]
+    },
+    "inline-prose": {
+      "begin": "(>\\s*)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.prose.quote.pactia punctuation.definition.blockquote" }
+      },
+      "end": "(?=\\s*\\})",
+      "patterns": [
+        { "include": "#interpolation" },
+        {
+          "match": "[^}]+?(?=\\s*\\})",
+          "name": "string.unquoted.prose.pactia string.quoted.other markup.italic"
+        }
+      ]
+    },
     "comments": {
       "patterns": [
         {
@@ -318,18 +346,20 @@
     "inline-tag-modifiers": {
       "patterns": [
         {
-          "begin": "(@)([\\w]+)\\s*(\\{)(?=[^{}]*\\})",
+          "begin": "(@)(?:(\\w+)::)?(\\w+)(?:\\s+([\\w.-]+))?\\s*(\\{)(?=[^{}]*\\})",
           "beginCaptures": {
             "1": { "name": "punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
-            "2": { "name": "entity.name.tag.clause.pactia entity.name.function.macro entity.name.function modifier" },
-            "3": { "name": "punctuation.section.block.begin.pactia" }
+            "2": { "name": "entity.name.namespace.pactia" },
+            "3": { "name": "entity.name.tag.clause.pactia entity.name.function.macro entity.name.function modifier" },
+            "4": { "name": "entity.name.tag.target.pactia" },
+            "5": { "name": "punctuation.section.block.begin.pactia" }
           },
           "end": "(\\})",
           "endCaptures": {
             "1": { "name": "punctuation.section.block.end.pactia" }
           },
           "patterns": [
-            { "include": "#inline-object-content" }
+            { "include": "#inline-block-content" }
           ]
         }
       ]
@@ -375,16 +405,16 @@
         {
           "match": "^(\\s*)(@@)([\\w]+)(?:\\(([^)]+)\\))?\\s*$",
           "captures": {
-            "2": { "name": "punctuation.definition.modifier.pactia" },
-            "3": { "name": "entity.name.tag.modifier.pactia" },
+            "2": { "name": "punctuation.definition.modifier.pactia punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
+            "3": { "name": "entity.name.tag.modifier.pactia entity.name.function.macro entity.name.function modifier" },
             "4": { "name": "entity.name.type.pactia" }
           }
         },
         {
           "match": "^(\\s*)(@@)([\\w]+)(?:\\(([^)]+)\\))?\\s+([A-Za-z][\\w]*)",
           "captures": {
-            "2": { "name": "punctuation.definition.modifier.pactia" },
-            "3": { "name": "entity.name.tag.modifier.pactia" },
+            "2": { "name": "punctuation.definition.modifier.pactia punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
+            "3": { "name": "entity.name.tag.modifier.pactia entity.name.function.macro entity.name.function modifier" },
             "4": { "name": "entity.name.type.pactia" },
             "5": { "name": "entity.name.type.pactia" }
           }
@@ -396,8 +426,8 @@
         {
           "match": "(@@)([\\w]+)(?:\\(([^)]+)\\))?",
           "captures": {
-            "1": { "name": "punctuation.definition.modifier.pactia" },
-            "2": { "name": "entity.name.tag.modifier.pactia" },
+            "1": { "name": "punctuation.definition.modifier.pactia punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
+            "2": { "name": "entity.name.tag.modifier.pactia entity.name.function.macro entity.name.function modifier" },
             "3": { "name": "entity.name.type.pactia" }
           }
         }
@@ -526,8 +556,8 @@
         {
           "match": "^(import\\s+\\{[^}]*,\\s*)(@@)([\\w]+)",
           "captures": {
-            "2": { "name": "punctuation.definition.modifier.pactia" },
-            "3": { "name": "entity.name.tag.modifier.pactia" }
+            "2": { "name": "punctuation.definition.modifier.pactia punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
+            "3": { "name": "entity.name.tag.modifier.pactia entity.name.function.macro entity.name.function modifier" }
           }
         },
         {

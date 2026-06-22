@@ -6,6 +6,18 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-06-22
+
+### Fixed
+
+- **Single-line tag blocks with a target:** `@security fleet { > prose }` and `@actor admins { … }` now highlight tag names and inline `> prose` on one line.
+- **`@@` modifier colors:** `@@pk`, `@@output`, and related sigils use the same yellow/bold styling as `@` tags and `#` macros in all themes.
+- **Theme token colors:** apply Pactia color rules under `[*]` instead of the invalid `[pactia]` theme key.
+
+### Changed
+
+- Updated marketplace icon asset.
+
 ## [1.3.1] - 2026-06-22
 
 ### Added
