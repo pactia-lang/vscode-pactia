@@ -12,16 +12,20 @@
     { "include": "#package-imports" },
     { "include": "#inline-tag-modifiers" },
     { "include": "#inline-objects" },
+    { "include": "#modifier-tag-lines" },
     { "include": "#modifier-tags" },
     { "include": "#modifier-shorthands" },
     { "include": "#modifier-flags" },
     { "include": "#host-tag-prefix" },
     { "include": "#macros" },
     { "include": "#def-declarations" },
+    { "include": "#context-declarations" },
+    { "include": "#context-constants" },
     { "include": "#module-constants" },
     { "include": "#def-field-specs" },
     { "include": "#single-line-tag-blocks" },
-    { "include": "#attach-model" },
+    { "include": "#attach-references" },
+    { "include": "#export-blocks" },
     { "include": "#multiline-blocks" },
     { "include": "#keywords" },
     { "include": "#assignment-keys" },
@@ -41,16 +45,20 @@
         { "include": "#inline-tag-modifiers" },
         { "include": "#inline-objects" },
         { "include": "#object-value-blocks" },
+        { "include": "#modifier-tag-lines" },
         { "include": "#modifier-tags" },
         { "include": "#modifier-shorthands" },
         { "include": "#modifier-flags" },
         { "include": "#host-tag-prefix" },
         { "include": "#macros" },
         { "include": "#def-declarations" },
+        { "include": "#context-declarations" },
+        { "include": "#context-constants" },
         { "include": "#module-constants" },
         { "include": "#def-field-specs" },
         { "include": "#single-line-tag-blocks" },
-        { "include": "#attach-model" },
+        { "include": "#attach-references" },
+        { "include": "#export-blocks" },
         { "include": "#multiline-blocks" },
         { "include": "#keywords" },
         { "include": "#assignment-keys" },
@@ -150,13 +158,20 @@
         }
       ]
     },
-    "attach-model": {
+    "attach-references": {
       "patterns": [
         {
           "match": "^(\\s*)(model)\\s*\\((\\w+)\\)\\s*,?\\s*$",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
             "3": { "name": "entity.name.type.pactia" }
+          }
+        },
+        {
+          "match": "^(\\s*)(context)\\s*\\((\\w+)\\)\\s*,?\\s*$",
+          "captures": {
+            "2": { "name": "keyword.declaration.pactia" },
+            "3": { "name": "entity.name.context.pactia" }
           }
         }
       ]
@@ -186,16 +201,57 @@
         { "include": "#block-content" }
       ]
     },
+    "context-declarations": {
+      "patterns": [
+        {
+          "begin": "^(\\s*)(?:(export)\\s+)?(context)\\s+(\\w+)\\s*\\{\\s*$",
+          "beginCaptures": {
+            "2": { "name": "keyword.declaration.pactia" },
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "entity.name.context.pactia" }
+          },
+          "end": "^(\\1)\\}(?:,)?\\s*$",
+          "endCaptures": {
+            "0": { "name": "punctuation.section.block.end.pactia" }
+          },
+          "patterns": [
+            { "include": "#block-content" }
+          ]
+        }
+      ]
+    },
+    "context-constants": {
+      "patterns": [
+        {
+          "begin": "^(\\s*)(def)\\s+([\\w]+)\\s*(=)\\s*(context)\\s+(\\w+)\\s*\\{\\s*$",
+          "beginCaptures": {
+            "2": { "name": "keyword.declaration.pactia" },
+            "3": { "name": "variable.other.constant.pactia" },
+            "4": { "name": "keyword.operator.assignment.pactia" },
+            "5": { "name": "keyword.declaration.pactia" },
+            "6": { "name": "entity.name.context.pactia" }
+          },
+          "end": "^(\\1)\\}(?:,)?\\s*$",
+          "endCaptures": {
+            "0": { "name": "punctuation.section.block.end.pactia" }
+          },
+          "patterns": [
+            { "include": "#block-content" }
+          ]
+        }
+      ]
+    },
     "def-declarations": {
       "patterns": [
         {
-          "begin": "^(\\s*)(?:export\\s+)?(def)\\s+(@@|@|#)([\\w]+)(?:\\([^)]*\\))?(?:\\s+(in)\\s+((?:product|module|model|service|field)(?:\\s*,\\s*(?:product|module|model|service|field))*))?\\s*\\{\\s*$",
+          "begin": "^(\\s*)(?:(export)\\s+)?(def)\\s+(@@|@|#)([\\w]+)(?:\\([^)]*\\))?(?:\\s+(in)\\s+((?:product|module|model|service|field)(?:\\s*,\\s*(?:product|module|model|service|field))*))?\\s*\\{\\s*$",
           "beginCaptures": {
             "2": { "name": "keyword.declaration.pactia" },
-            "3": { "name": "punctuation.definition.def-sigil.pactia" },
-            "4": { "name": "entity.name.tag.def.pactia entity.name.function.macro.pactia entity.name.function" },
-            "5": { "name": "keyword.declaration.pactia" },
-            "6": { "name": "constant.language.placement.pactia" }
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "punctuation.definition.def-sigil.pactia" },
+            "5": { "name": "entity.name.tag.def.pactia entity.name.function.macro.pactia entity.name.function" },
+            "6": { "name": "keyword.declaration.pactia" },
+            "7": { "name": "constant.language.placement.pactia" }
           },
           "end": "^(\\1)\\}(?:,)?\\s*$",
           "endCaptures": {
@@ -295,6 +351,46 @@
         }
       ]
     },
+    "export-blocks": {
+      "patterns": [
+        {
+          "begin": "^(\\s*)(export)\\s+(model|module|service)\\s+(\\w+)\\s*\\{\\s*$",
+          "beginCaptures": {
+            "2": { "name": "keyword.declaration.pactia" },
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "entity.name.type.pactia" }
+          },
+          "end": "^(\\1)\\}(?:,)?\\s*$",
+          "endCaptures": {
+            "0": { "name": "punctuation.section.block.end.pactia" }
+          },
+          "patterns": [
+            { "include": "#block-content" }
+          ]
+        }
+      ]
+    },
+    "modifier-tag-lines": {
+      "patterns": [
+        {
+          "match": "^(\\s*)(@@)([\\w]+)(?:\\(([^)]+)\\))?\\s*$",
+          "captures": {
+            "2": { "name": "punctuation.definition.modifier.pactia" },
+            "3": { "name": "entity.name.tag.modifier.pactia" },
+            "4": { "name": "entity.name.type.pactia" }
+          }
+        },
+        {
+          "match": "^(\\s*)(@@)([\\w]+)(?:\\(([^)]+)\\))?\\s+([A-Za-z][\\w]*)",
+          "captures": {
+            "2": { "name": "punctuation.definition.modifier.pactia" },
+            "3": { "name": "entity.name.tag.modifier.pactia" },
+            "4": { "name": "entity.name.type.pactia" },
+            "5": { "name": "entity.name.type.pactia" }
+          }
+        }
+      ]
+    },
     "modifier-tags": {
       "patterns": [
         {
@@ -310,7 +406,7 @@
     "modifier-flags": {
       "patterns": [
         {
-          "match": "(@)(pk|unique|index|nullable|pii|public|optional)\\b",
+          "match": "(?<!@)(@)(pk|unique|index|nullable|pii|public|optional)\\b",
           "captures": {
             "1": { "name": "punctuation.definition.tag.pactia punctuation.definition.macro.pactia" },
             "2": { "name": "entity.name.tag.clause.pactia entity.name.function.macro entity.name.function modifier.flag" }
@@ -513,7 +609,7 @@
           }
         },
         {
-          "match": "\\b(pactia|product|module|service|model|import|export|def|in)\\b",
+          "match": "\\b(pactia|product|module|service|model|context|import|export|def|in)\\b",
           "name": "keyword.declaration.pactia"
         },
         {

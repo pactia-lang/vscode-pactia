@@ -6,6 +6,14 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-06-21
+
+### Added
+
+- **`context` keyword:** `context name { }`, `export context name { }`, attach `context(symbol)`, and module alias `def alias = context name { }`.
+- **Field modifier lines:** `@@pk`, `@@nullable` on their own lines inside `@entity` blocks; `export model` fragment blocks.
+- Scope tests and fixtures for `context` and `billing.model` fragments.
+
 ## [1.2.0] - 2026-06-21
 
 ### Changed
@@ -34,6 +42,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Nine kernel keywords, clause tags, macros, registry authoring blocks, package imports.
 - CI test suite: extension manifest, scope cases, fixture scans, markdown injection.
 
-[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/pactia-lang/vscode-pactia/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/pactia-lang/vscode-pactia/releases/tag/v1.2.0
 [1.0.2]: https://github.com/pactia-lang/vscode-pactia/releases/tag/v1.0.2

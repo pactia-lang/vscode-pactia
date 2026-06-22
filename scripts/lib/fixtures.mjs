@@ -4,6 +4,17 @@ import { extensionRoot } from "./textmate.mjs";
 
 const fixtureCandidates = [
   {
+    id: "fragment",
+    paths: [
+      "testdata/fixtures/fragments/billing.model.pactia",
+      "../examples/marketplace/fragments/billing.model.pactia",
+    ],
+  },
+  {
+    id: "context",
+    paths: ["testdata/fixtures/context/context-example.pactia"],
+  },
+  {
     id: "kernel",
     paths: [
       "testdata/fixtures/kernel/fleet-management-v2.pactia",

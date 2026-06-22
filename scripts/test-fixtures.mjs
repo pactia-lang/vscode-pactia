@@ -35,6 +35,24 @@ const requiredScopesPerFile = {
     "comment.line.double-slash.pactia",
     "string.unquoted.prose.pactia",
   ],
+  context: [
+    "keyword.declaration.pactia",
+    "entity.name.context.pactia",
+    "keyword.other.assignment.pactia",
+    "string.quoted.double.pactia",
+    "string.unquoted.prose.pactia",
+    "variable.other.constant.pactia",
+    "entity.name.type.pactia",
+  ],
+  fragment: [
+    "keyword.declaration.pactia",
+    "entity.name.tag.clause.pactia",
+    "entity.name.tag.modifier.pactia",
+    "punctuation.definition.modifier.pactia",
+    "entity.name.type.pactia",
+    "support.type.primitive.pactia",
+    "meta.object.key.pactia",
+  ],
 };
 
 const clauseTagLine =
@@ -44,10 +62,17 @@ const proseLine = /^\s*>\s+/;
 const defLine = /^\s*(?:export\s+)?def\s+(@@|@|#)/;
 const legacyMacroLine = /#\[/;
 const macroInvokeLine = /^\s*#[\w-]+/;
+const modifierTagLine = /^\s*@@\w+/;
 
 function fixtureKind(fixtureId) {
   if (fixtureId === "package") {
     return "package";
+  }
+  if (fixtureId === "context") {
+    return "context";
+  }
+  if (fixtureId === "fragment") {
+    return "fragment";
   }
   return "kernel";
 }
@@ -127,6 +152,42 @@ function checkMacroLine(grammar, line, lineNumber, fileLabel) {
   return failed;
 }
 
+function checkModifierTagLine(grammar, line, lineNumber, fileLabel) {
+  const match = line.match(/^\s*@@([\w]+)/);
+  if (!match || !modifierTagLine.test(line)) {
+    return 0;
+  }
+
+  const modifierName = match[1];
+  const context = `${fileLabel}:${lineNumber} ${JSON.stringify(line)}`;
+  let failed = 0;
+
+  const sigilToken = findTokenByExactText(grammar, line, "@@");
+  if (!sigilToken?.scopes.includes("punctuation.definition.modifier.pactia")) {
+    console.error(
+      `FAIL: ${context} — @@ missing punctuation.definition.modifier.pactia`,
+    );
+    failed += 1;
+  }
+
+  const modifierToken = findTokenByExactText(grammar, line, modifierName);
+  if (!modifierToken?.scopes.includes("entity.name.tag.modifier.pactia")) {
+    console.error(
+      `FAIL: ${context} — modifier ${modifierName} missing entity.name.tag.modifier.pactia`,
+    );
+    failed += 1;
+  }
+
+  if (modifierToken?.scopes.includes("entity.name.tag.clause.pactia")) {
+    console.error(
+      `FAIL: ${context} — modifier ${modifierName} must not use clause tag scope`,
+    );
+    failed += 1;
+  }
+
+  return failed;
+}
+
 export async function runFixtureTests() {
   const grammar = await createPactiaGrammar();
   let failed = 0;
@@ -189,6 +250,7 @@ export async function runFixtureTests() {
       }
 
       failed += checkMacroLine(grammar, line, lineNumber, rel);
+      failed += checkModifierTagLine(grammar, line, lineNumber, rel);
 
       if (proseLine.test(line)) {
         const hasProse = result.lineResults

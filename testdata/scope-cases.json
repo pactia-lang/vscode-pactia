@@ -111,6 +111,30 @@
       "include": ["entity.name.tag.modifier.pactia"]
     },
     {
+      "id": "field-modifier-pk",
+      "line": "    @@pk",
+      "token": "pk",
+      "include": ["entity.name.tag.modifier.pactia"]
+    },
+    {
+      "id": "field-modifier-pk-sigil",
+      "line": "    @@pk",
+      "token": "@@",
+      "include": ["punctuation.definition.modifier.pactia"]
+    },
+    {
+      "id": "field-modifier-nullable",
+      "line": "    @@nullable",
+      "token": "nullable",
+      "include": ["entity.name.tag.modifier.pactia"]
+    },
+    {
+      "id": "field-modifier-before-field",
+      "line": "    @@nullable",
+      "token": "@@",
+      "include": ["punctuation.definition.modifier.pactia"]
+    },
+    {
       "id": "modifier-tag-with-arg",
       "line": "      @@output OrderListResponse",
       "token": "output",
@@ -344,6 +368,54 @@
       "line": "      @emit vehicle.created",
       "token": "vehicle.created",
       "include": ["variable.other.event.pactia"]
+    },
+    {
+      "id": "context-keyword",
+      "line": "context api_notes {",
+      "token": "context",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "context-name",
+      "line": "context api_notes {",
+      "token": "api_notes",
+      "include": ["entity.name.context.pactia"]
+    },
+    {
+      "id": "export-context-keyword",
+      "line": "export context api_notes {",
+      "token": "export",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "export-context-name",
+      "line": "export context api_notes {",
+      "token": "api_notes",
+      "include": ["entity.name.context.pactia"]
+    },
+    {
+      "id": "attach-context",
+      "line": "    context(api_notes),",
+      "token": "api_notes",
+      "include": ["entity.name.context.pactia"]
+    },
+    {
+      "id": "context-path-key",
+      "line": "  path: \"docs/api.md\",",
+      "token": "path",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "context-constant-alias",
+      "line": "  def api_docs = context api_notes {",
+      "token": "api_docs",
+      "include": ["variable.other.constant.pactia"]
+    },
+    {
+      "id": "context-constant-target",
+      "line": "  def api_docs = context api_notes {",
+      "token": "api_notes",
+      "include": ["entity.name.context.pactia"]
     }
   ]
 }

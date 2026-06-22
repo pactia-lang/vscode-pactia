@@ -1,0 +1,35 @@
+export model billing_model {
+  @entity InvoiceLine {
+    @@pk
+    id: uuid,
+    description: string,
+    amountCents: int,
+  }
+
+  @entity Invoice {
+    @@pk
+    id: uuid,
+    orderId: uuid,
+    @@nullable
+    paidAt: datetime,
+    lines: InvoiceLine[],
+  }
+
+  @entity InvoiceResponse {
+    invoice: Invoice,
+  }
+
+  @entity InvoiceListItem {
+    @@pk
+    id: uuid,
+    orderId: uuid,
+    @@nullable
+    paidAt: datetime,
+  }
+
+  @entity InvoiceListResponse {
+    invoices: InvoiceListItem[],
+    @@nullable
+    nextCursor: string,
+  }
+}
