@@ -32,6 +32,13 @@ export function runExtensionTests() {
     failed += fail("package.json version must be semver");
   }
 
+  const iconPath = packageJson.icon
+    ? path.join(extensionRoot, packageJson.icon.replace(/^\.\//, ""))
+    : undefined;
+  if (!iconPath || !fs.existsSync(iconPath)) {
+    failed += fail("package.json icon must point to an existing PNG");
+  }
+
   const grammars = packageJson.contributes?.grammars ?? [];
   if (grammars.length !== 2) {
     failed += fail("expected two contributed grammars");
