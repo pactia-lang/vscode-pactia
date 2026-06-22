@@ -78,10 +78,10 @@ export function runExtensionTests() {
   const colorRules =
     packageJson.contributes?.configurationDefaults?.[
       "editor.tokenColorCustomizations"
-    ]?.["[pactia]"]?.textMateRules ?? [];
+    ]?.["[*]"]?.textMateRules ?? [];
 
   if (colorRules.length === 0) {
-    failed += fail("[pactia] token color customizations are missing");
+    failed += fail("[*] token color customizations are missing");
   }
 
   const configuredScopes = new Set(
@@ -89,7 +89,7 @@ export function runExtensionTests() {
   );
   for (const scope of requiredColorScopes) {
     if (!configuredScopes.has(scope)) {
-      failed += fail(`missing [pactia] color rule for ${scope}`);
+      failed += fail(`missing [*] color rule for ${scope}`);
     }
   }
 

@@ -50,6 +50,37 @@
       "exclude": ["entity.name.tag.clause.pactia"]
     },
     {
+      "id": "single-line-tag-inline-prose",
+      "line": "@rule r1 { > text }",
+      "token": "text",
+      "include": ["string.unquoted.prose.pactia"]
+    },
+    {
+      "id": "single-line-tag-inline-prose-marker",
+      "line": "@rule r1 { > text }",
+      "token": "> ",
+      "include": ["punctuation.definition.prose.quote.pactia"]
+    },
+    {
+      "id": "single-line-tag-target-inline-prose",
+      "line": "    @security fleet { > All admin mutations must be audit-logged }",
+      "token": "All admin mutations must be audit-logged",
+      "include": ["string.unquoted.prose.pactia"]
+    },
+    {
+      "id": "single-line-tag-target-clause",
+      "line": "    @security fleet { > All admin mutations must be audit-logged }",
+      "token": "security",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "single-line-tag-target-name",
+      "line": "    @actor admins { role: Admin, }",
+      "token": "admins",
+      "include": ["entity.name.tag.target.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
       "id": "clause-tag-no-target",
       "line": "  @topology {",
       "token": "topology",
