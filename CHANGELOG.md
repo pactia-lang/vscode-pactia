@@ -6,6 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-06-22
+
+### Added
+
+- Marketplace icon (`images/icon.png`).
+
 ## [1.3.0] - 2026-06-21
 
 ### Added
@@ -42,7 +48,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Nine kernel keywords, clause tags, macros, registry authoring blocks, package imports.
 - CI test suite: extension manifest, scope cases, fixture scans, markdown injection.
 
-[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/pactia-lang/vscode-pactia/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/pactia-lang/vscode-pactia/releases/tag/v1.2.0
 [1.0.2]: https://github.com/pactia-lang/vscode-pactia/releases/tag/v1.0.2
