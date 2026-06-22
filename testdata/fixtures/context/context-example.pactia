@@ -1,0 +1,25 @@
+pactia 1.2
+
+product ContextDemo {
+  > External files attached via the context keyword.
+
+  context api_notes {
+    path: "docs/api.md"
+    > API reference for agents and reviewers.
+  }
+
+  export context onboarding {
+    path: "assets/onboarding/"
+    > Onboarding images and copy.
+  }
+
+  def api_docs = context api_notes {
+    path: "docs/api.md"
+  }
+
+  module(demo) {
+    service(DemoService) {
+      context(api_notes),
+    }
+  }
+}

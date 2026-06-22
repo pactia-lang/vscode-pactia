@@ -48,6 +48,7 @@ GitHub.com does not highlight `pactia` fences until [Linguist](https://github.co
 
 Grammar tests use vendored copies under `testdata/fixtures/`, with fallbacks to [pactiac test/fixtures](https://github.com/pactia-lang/pactiac/tree/main/test/fixtures) in a monorepo layout.
 
+- `testdata/fixtures/context/context-example.pactia` — `context` blocks, export, attach, alias
 - `testdata/fixtures/kernel/fleet-management-v2.pactia` — kernel product reference (synced from pactiac `relay.pactia`)
 - `testdata/fixtures/packages/fintech-rules-index.pactia` — package `export def @` / `export def #`
 - `testdata/fixtures/single-file/fleet-management-v2.pactia` — single-file layout
@@ -76,15 +77,16 @@ Reload after updating (`Developer: Reload Window`). Confirm language mode is **P
 
 | Construct | Examples |
 | --- | --- |
-| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `import`, `export`, `def`, `in` |
+| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `context`, `import`, `export`, `def`, `in` |
 | **Three line kinds** | `@tag { }`, `@@modifier`, `#macro`, `> prose` |
 | **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@auth Customer` |
-| **Modifier tags** | `@@output VehicleDto`, `@@pk`, `@@nullable` |
+| **Modifier tags** | `@@output VehicleDto`, `@@pk`, `@@nullable` (standalone field lines and inline) |
 | **Modifier flags** | `@pk`, `@public`, `@pii`, `@optional` |
 | **Modifier shorthand** | `@output VehicleDto`, `@status 201`, `@emit vehicle.created` |
 | **Macros** | `#list`, `#rate_limit(1000, rpm)`, legacy `#[list]` |
 | **Package imports** | `import @scope/name;`, `import { @api, @@output, #database } from @pkg;` |
-| **Attach syntax** | `module(catalog) { service(CatalogService) { model(catalog_model) } }` |
+| **Attach syntax** | `module(catalog) { service(CatalogService) { model(catalog_model) } }`, `context(api_notes)` |
+| **Context blocks** | `context api_notes { path: "docs/api.md" }`, `export context …`, `def alias = context api_notes { }` |
 | **export def** | `export def @name in service { }`, `export def @@name in field { }`, `export def #name in service { }` |
 | **Module constants** | `def max_page = 100` |
 | **Prose / interpolation** | `> line`, `>> block >>`, `${max_page}` |
@@ -107,6 +109,7 @@ Reload after updating (`Developer: Reload Window`). Confirm language mode is **P
 
 | Version | Feature |
 | --- | --- |
+| 1.3.0 | `context` keyword — blocks, export, attach, module alias |
 | 1.2.0 | Spec 1.2 grammar — `def @`/`@@`/`#`, attach syntax, partial imports, `#macro` invoke |
 | 1.0.2 | Clause tag colors, single-line `@stack`, comprehensive grammar tests |
 | 1.0.1 | Markdown ` ```pactia ` fence injection |
