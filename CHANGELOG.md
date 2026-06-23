@@ -6,6 +6,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+
+- README: Visual Studio Marketplace install link and `code --install-extension` instructions.
+
 ## [1.3.2] - 2026-06-22
 
 ### Fixed
