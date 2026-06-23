@@ -6,6 +6,16 @@ Spec: [language-spec](https://github.com/pactia-lang/spec/blob/main/docs/languag
 
 ## Install
 
+**Visual Studio Marketplace:** [Pactia — `pactia-lang.pactia`](https://marketplace.visualstudio.com/items?itemName=pactia-lang.pactia)
+
+Install from the marketplace in VS Code or Cursor (**Extensions** → search **Pactia**), or:
+
+```bash
+code --install-extension pactia-lang.pactia
+```
+
+### From source (development)
+
 ```bash
 git clone https://github.com/pactia-lang/vscode-pactia.git
 cd vscode-pactia
