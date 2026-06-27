@@ -72,7 +72,7 @@ Default colors for `.pactia` files (dark themes):
 | **Clause tags** `@actor`, `@api` | Yellow, bold (`@` + tag name) | `entity.name.tag.clause.pactia` |
 | **Modifier tags** `@@output`, `@@pk` | Yellow, bold (`@@` + name) | `entity.name.tag.modifier.pactia` |
 | **Tag targets** `customers`, `Vehicle` | Theme default | `entity.name.tag.target.pactia` |
-| **Macros** `#list`, `#[list]` (legacy) | Theme default (Rust-like) | `entity.name.function.macro.pactia` |
+| **Macros** `#list` | Theme default (Rust-like) | `entity.name.function.macro.pactia` |
 | **Prose** `>` lines | Purple, italic | `string.unquoted.prose.pactia` |
 | **Prose** `>` prefix | Green | `punctuation.definition.prose.quote.pactia` |
 | **Kernel keywords** | Blue | `keyword.declaration.pactia` |
