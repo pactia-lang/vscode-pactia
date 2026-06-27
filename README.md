@@ -1,48 +1,42 @@
-# Pactia — Cursor / VS Code extension
+# Pactia — VS Code / Cursor Extension
 
-Syntax highlighting for `.pactia` files and ` ```pactia ` fences in Markdown — [Pactia spec 1.2](https://github.com/pactia-lang/spec).
+Syntax highlighting for **Pactia 1.2** — the intent language for the AI era. Write `.pactia` files and ` ```pactia ` Markdown fences with full TextMate grammar support.
 
-Spec: [language-spec](https://github.com/pactia-lang/spec/blob/main/docs/language-spec.md) | [editor-support](https://github.com/pactia-lang/spec/blob/main/docs/editor-support.md) | [registry](https://github.com/pactia-lang/spec/blob/main/docs/registry.md) | [CHANGELOG](CHANGELOG.md)
+[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/pactia-lang.pactia?label=VS%20Marketplace&color=blue)](https://marketplace.visualstudio.com/items?itemName=pactia-lang.pactia)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## Install
+---
 
-**Visual Studio Marketplace:** [Pactia — `pactia-lang.pactia`](https://marketplace.visualstudio.com/items?itemName=pactia-lang.pactia)
+## Features
 
-Install from the marketplace in VS Code or Cursor (**Extensions** → search **Pactia**), or:
+### Full Pactia 1.2 Syntax
 
-```bash
-code --install-extension pactia-lang.pactia
-```
+Every language construct is highlighted with distinct, readable colors:
 
-### From source (development)
+| Sigil | Kind | Example |
+|-------|------|---------|
+| `@` | Host tag | `@entity Order { id: uuid }` |
+| `@@` | Modifier tag | `@@output VehicleDto` |
+| `#` | Macro | `#list`, `#rust-stack` |
+| `>` / `>>` | Prose | `> Never commit secrets.` |
 
-```bash
-git clone https://github.com/pactia-lang/vscode-pactia.git
-cd vscode-pactia
-./scripts/install-extension.sh
-```
+### Keywords & Blocks
 
-Targets Cursor and VS Code when present. Options: `--cursor` or `--vscode` only.
+`product`, `module`, `service`, `model`, `context`, `import`, `export`, `def`, `in`
 
-In a [pactia-lang](https://github.com/pactia-lang) monorepo checkout, run `./vscode-pactia/scripts/install-extension.sh` from the repo root instead.
+### Workspace Attach Syntax
 
-Then **Developer: Reload Window** — language mode must be **Pactia** on `.pactia` files. In Markdown, open a ` ```pactia ` fence to confirm highlighting.
+`module(orders) { service(OrderService) { model(orders_model) } }`
 
-## Development
+### Fragment Exports
 
-```bash
-cd vscode-pactia
-npm install
-npm test                 # full suite (extension, scopes, fixtures, markdown)
-npm run test:scopes      # declarative scope contract cases
-npm run test:fixtures    # scan spec/examples fixtures for balance + scopes
-npm run package          # pactia-<version>.vsix
-npm run install:extension
-```
+`export module`, `export service`, `export model`, `export context`
 
-## Markdown fences
+### Context Blocks
 
-With the extension installed, ` ```pactia ` blocks in `.md` files get full Pactia highlighting (including `spec/docs/`). Use the **`pactia`** fence tag — not `rust` or plain `text`.
+`context api_notes { path: "docs/api.md" }` — with `export context` and `context()` attach
+
+### Markdown Fences
 
 ````markdown
 ```pactia
@@ -54,75 +48,107 @@ product MyApp {
 ```
 ````
 
-GitHub.com does not highlight `pactia` fences until [Linguist](https://github.com/github-linguist/linguist) adds the language; local preview relies on this extension.
-
-Grammar tests use vendored copies under `testdata/fixtures/`, with fallbacks to [pactiac test/fixtures](https://github.com/pactia-lang/pactiac/tree/main/test/fixtures) in a monorepo layout.
-
-- `testdata/fixtures/context/context-example.pactia` — `context` blocks, export, attach, alias
-- `testdata/fixtures/kernel/fleet-management-v2.pactia` — kernel product reference (synced from pactiac `relay.pactia`)
-- `testdata/fixtures/packages/fintech-rules-index.pactia` — package `export def @` / `export def #`
-- `testdata/fixtures/single-file/fleet-management-v2.pactia` — single-file layout
-
-## Token colors (built-in)
-
-Default colors for `.pactia` files (dark themes):
+### Built-in Theme Colors (Dark)
 
 | Element | Color | Scope |
-| --- | --- | --- |
-| **Clause tags** `@actor`, `@api` | Yellow, bold (`@` + tag name) | `entity.name.tag.clause.pactia` |
-| **Modifier tags** `@@output`, `@@pk` | Yellow, bold (`@@` + name) | `entity.name.tag.modifier.pactia` |
-| **Tag targets** `customers`, `Vehicle` | Theme default | `entity.name.tag.target.pactia` |
-| **Macros** `#list` | Theme default (Rust-like) | `entity.name.function.macro.pactia` |
-| **Prose** `>` lines | Purple, italic | `string.unquoted.prose.pactia` |
-| **Prose** `>` prefix | Green | `punctuation.definition.prose.quote.pactia` |
-| **Kernel keywords** | Blue | `keyword.declaration.pactia` |
-| **Def sigils / imports** `@`, `@@`, `#`, `from` | Blue | `punctuation.definition.def-sigil.pactia`, `keyword.control.import.pactia` |
-| **Placement / def spec** `in service`, `modifier,` | Gold | `constant.language.placement.pactia`, `constant.language.def-spec.pactia` |
-| **HTTP** `GET`/`POST` | Yellow | `keyword.control.http.pactia` |
-| **Braces** `{` `}` | Gold | `punctuation.section.*.pactia` |
+|---------|-------|-------|
+| Tags `@api`, `@entity` | Yellow, bold | `entity.name.tag.clause.pactia` |
+| Modifiers `@@output`, `@@pk` | Yellow, bold | `entity.name.tag.modifier.pactia` |
+| Macros `#list`, `#create` | Gold, bold | `entity.name.function.macro.pactia` |
+| Keywords `product`, `def`, `in` | Blue | `keyword.declaration.pactia` |
+| Prose `>` lines | Purple, italic | `string.unquoted.prose.pactia` |
+| Prose prefix `>` | Green | `punctuation.definition.prose.quote.pactia` |
+| Braces `{` `}` | Gold | `punctuation.section.*.pactia` |
+| HTTP `GET` / `POST` | Yellow | `keyword.control.http.pactia` |
+| `context` names | Gold | `entity.name.context.pactia` |
 
-Reload after updating (`Developer: Reload Window`). Confirm language mode is **Pactia** in the status bar.
+---
 
-## Grammar coverage (spec 1.2)
+## Quick Start
 
-| Construct | Examples |
-| --- | --- |
-| **Kernel keywords** | `pactia`, `product`, `module`, `service`, `model`, `context`, `import`, `export`, `def`, `in` |
-| **Three line kinds** | `@tag { }`, `@@modifier`, `#macro`, `> prose` |
-| **Clause tags** | `@entity Vehicle { }`, `@api list { }`, `@auth Customer` |
-| **Modifier tags** | `@@output VehicleDto`, `@@pk`, `@@nullable` (standalone field lines and inline) |
-| **Modifier flags** | `@pk`, `@public`, `@pii`, `@optional` |
-| **Modifier shorthand** | `@output VehicleDto`, `@status 201`, `@emit vehicle.created` |
-| **Macros** | `#list`, `#rate_limit(1000, rpm)`, legacy `#[list]` |
-| **Package imports** | `import @scope/name;`, `import { @api, @@output, #database } from @pkg;` |
-| **Attach syntax** | `module(catalog) { service(CatalogService) { model(catalog_model) } }`, `context(api_notes)` |
-| **Context blocks** | `context api_notes { path: "docs/api.md" }`, `export context …`, `def alias = context api_notes { }` |
-| **export def** | `export def @name in service { }`, `export def @@name in field { }`, `export def #name in service { }` |
-| **Module constants** | `def max_page = 100` |
-| **Prose / interpolation** | `> line`, `>> block >>`, `${max_page}` |
-| **Inline objects** | `{ service: FleetService, metric: error_rate }` |
+### Install from Marketplace
 
-## Not highlighted as kernel keywords
+**Extensions** → search **Pactia** → Install, or:
 
-- Macro/tag/modifier names (`list`, `output`, `auth`, …) — scoped as tag/macro entities, not keywords
-- `on`, `when`, `then` in prose — plain text unless inside structured tag fields
+```bash
+code --install-extension pactia-lang.pactia
+```
 
-## Keeping grammar in sync
+Open any `.pactia` file — language mode should show **Pactia** in the status bar.
 
-1. Update [pactia-lang/spec](https://github.com/pactia-lang/spec) docs and fixtures
-2. Refresh `testdata/fixtures/` when pactiac canonical fixtures change
-3. Edit `syntaxes/pactia.tmLanguage.json` (and `pactia.markdown.tmLanguage.json` if fence behavior changes)
-3. Run `npm test`
-4. Run `npm run install:extension` and reload window
+### From Source
 
-## Roadmap
+```bash
+git clone https://github.com/pactia-lang/vscode-pactia.git
+cd vscode-pactia
+./scripts/install-extension.sh
+```
 
-| Version | Feature |
-| --- | --- |
-| 1.3.0 | `context` keyword — blocks, export, attach, module alias |
-| 1.2.0 | Spec 1.2 grammar — `def @`/`@@`/`#`, attach syntax, partial imports, `#macro` invoke |
-| 1.0.2 | Clause tag colors, single-line `@stack`, comprehensive grammar tests |
-| 1.0.1 | Markdown ` ```pactia ` fence injection |
-| 1.0 | Spec 1.0 grammar — registry blocks, qualified imports, package authoring |
-| 1.x | Snippets for `service`, `@api`, `@test` |
-| 2.0 | LSP — tag/macro completion from workspace registry |
+Supports Cursor and VS Code. Use `--cursor` or `--vscode` to target one editor.
+
+**Developer: Reload Window** after install.
+
+---
+
+## Pactia Language (1.2)
+
+Pactia is an **AI-native intent language**. You write what must stay true about your product — entities, APIs, roles, policy, prose — and the compiler lowers it to JSON IR for AI coding agents.
+
+- **Specification:** [pactia-lang/spec](https://github.com/pactia-lang/spec)
+- **Compiler:** [pactia-lang/pactiac](https://github.com/pactia-lang/pactiac)
+- **Package Manager:** [pactia-lang/pactia](https://github.com/pactia-lang/pactia)
+- **Packages:** [kernel](https://github.com/pactia-lang/kernel), [pactia-io](https://github.com/pactia-lang/pactia-io)
+
+```pactia
+pactia 1.0
+
+import @pactia/kernel;
+import @pactia/rust-stack;
+
+product Relay {
+  > B2B order relay between suppliers and retailers.
+  > List endpoints use cursor pagination (default 20, max 100).
+  > Never commit secrets. Map errors to our standard envelope.
+
+  #rust-stack
+
+  module orders {
+    service OrderService {
+      @auth Customer
+      @@output OrderListResponse
+      @api list_orders {
+        method: GET,
+        path: "/api/v1/orders",
+      }
+
+      @auth Customer
+      @@output CreateOrderResponse
+      @api create_order {
+        method: POST,
+        path: "/api/v1/orders",
+      }
+    }
+  }
+}
+```
+
+---
+
+## Development
+
+```bash
+npm install
+npm test                 # full suite: extension, scopes, fixtures, markdown
+npm run test:scopes      # 78 declarative scope contract cases
+npm run test:fixtures    # fixture balance + scope scan
+npm run test:markdown     # ```pactia fence injection
+npm run package           # pactia-<version>.vsix
+```
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+MIT — see [LICENSE](LICENSE).
