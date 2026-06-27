@@ -60,7 +60,6 @@ const clauseTagLine =
 const packageImportLine = /^\s*import\s+(@|\{|\*)/;
 const proseLine = /^\s*>\s+/;
 const defLine = /^\s*(?:export\s+)?def\s+(@@|@|#)/;
-const legacyMacroLine = /#\[/;
 const macroInvokeLine = /^\s*#[\w-]+/;
 const modifierTagLine = /^\s*@@\w+/;
 
@@ -117,20 +116,6 @@ function checkClauseTagLine(grammar, line, lineNumber, fileLabel) {
 
 function checkMacroLine(grammar, line, lineNumber, fileLabel) {
   let failed = 0;
-
-  if (legacyMacroLine.test(line)) {
-    const macroMatch = line.match(/#\[([\w]+)/);
-    if (macroMatch) {
-      const macroToken = findTokenByExactText(grammar, line, macroMatch[1]);
-      if (!macroToken?.scopes.includes("entity.name.function.macro.pactia")) {
-        console.error(
-          `FAIL: ${fileLabel}:${lineNumber} — legacy macro ${macroMatch[1]} missing entity.name.function.macro.pactia`,
-        );
-        failed += 1;
-      }
-    }
-    return failed;
-  }
 
   if (!macroInvokeLine.test(line)) {
     return failed;

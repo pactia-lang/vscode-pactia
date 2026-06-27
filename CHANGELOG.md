@@ -6,6 +6,20 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.3.4] - 2026-06-25
+
+### Fixed
+
+- **Partial import lists:** every symbol in `import { @api, @@output, #macro, name } from …` is highlighted — not only the first entry on the line.
+- **Import paths:** `from @pactia/kernel` and `from ./fragments/foo.pactia` paths are scoped consistently; extension keywords like `entity` and `module` no longer steal color inside file paths.
+
+## [1.3.3] - 2026-06-25
+
+### Fixed
+
+- **Module/service prose constants:** `def name = > prose` now highlights the `>` marker and prose body (e.g. `def checkout_policy = > Idempotent create…`).
+- **Numeric and string constants:** `def name = 100` and `def name = "…"` value tokens are scoped correctly.
+
 ### Changed
 
 - README: Visual Studio Marketplace install link and `code --install-extension` instructions.

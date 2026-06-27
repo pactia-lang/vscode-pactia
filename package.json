@@ -2,7 +2,7 @@
   "name": "pactia",
   "displayName": "Pactia",
   "description": "Syntax highlighting for Pactia contract files (.pactia)",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "publisher": "pactia-lang",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -128,6 +128,15 @@
               ],
               "settings": {
                 "foreground": "#9CDCFE"
+              }
+            },
+            {
+              "scope": [
+                "string.unquoted.path.pactia",
+                "variable.other.import.pactia"
+              ],
+              "settings": {
+                "foreground": "#CE9178"
               }
             },
             {

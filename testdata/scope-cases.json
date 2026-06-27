@@ -117,24 +117,8 @@
       "token": "rate_limit",
       "include": ["entity.name.function.macro.pactia"]
     },
-    {
-      "id": "legacy-macro-simple",
-      "line": "      #[list]",
-      "token": "list",
-      "include": ["entity.name.function.macro.pactia"]
-    },
-    {
-      "id": "legacy-macro-with-params",
-      "line": "      #[rate_limit(1000, rpm)]",
-      "token": "rate_limit",
-      "include": ["entity.name.function.macro.pactia"]
-    },
-    {
-      "id": "legacy-macro-param",
-      "line": "      #[rate_limit(1000, rpm)]",
-      "token": "1000, rpm",
-      "include": ["variable.parameter.macro.pactia"]
-    },
+
+
     {
       "id": "modifier-tag",
       "line": "        @@nullable",
@@ -293,6 +277,31 @@
       "include": ["entity.name.tag.modifier.pactia"]
     },
     {
+      "id": "partial-import-macro-list",
+      "line": "import { #rust-stack, #list, #paginated } from @pactia/rust-stack;",
+      "token": "rust-stack",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "partial-import-local-symbol",
+      "line": "import { max_page, pagination_hint } from ./shared/policy.pactia;",
+      "token": "max_page",
+      "include": ["variable.other.import.pactia"]
+    },
+    {
+      "id": "partial-import-local-path",
+      "line": "import { catalog } from ./fragments/catalog.module.pactia;",
+      "token": "./fragments/catalog.module.pactia",
+      "include": ["string.unquoted.path.pactia"]
+    },
+    {
+      "id": "partial-import-kernel-tag-list",
+      "line": "import { @api, @entity, @auth } from @pactia/kernel;",
+      "token": "entity",
+      "include": ["entity.name.tag.clause.pactia"],
+      "exclude": ["keyword.other.assignment.pactia"]
+    },
+    {
       "id": "attach-module",
       "line": "  module(catalog) {",
       "token": "catalog",
@@ -368,6 +377,24 @@
       "id": "module-constant-name",
       "line": "  def max_page = 100",
       "token": "max_page",
+      "include": ["variable.other.constant.pactia"]
+    },
+    {
+      "id": "module-constant-prose-marker",
+      "line": "  def checkout_policy = > Idempotent create for duplicate client retries.",
+      "token": "> ",
+      "include": ["punctuation.definition.prose.quote.pactia"]
+    },
+    {
+      "id": "module-constant-prose-value",
+      "line": "  def checkout_policy = > Idempotent create for duplicate client retries.",
+      "token": "Idempotent create for duplicate client retries.",
+      "include": ["string.unquoted.prose.pactia"]
+    },
+    {
+      "id": "module-constant-prose-name",
+      "line": "  def checkout_policy = > Idempotent create for duplicate client retries.",
+      "token": "checkout_policy",
       "include": ["variable.other.constant.pactia"]
     },
     {
