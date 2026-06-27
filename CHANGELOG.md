@@ -6,6 +6,16 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-06-27
+
+### Removed
+
+- **Legacy `#[name]` bracket macro patterns** — removed from grammar and test fixtures. Use `#name` / `#name(args)` per Pactia 1.2.
+
+### Changed
+
+- README rewritten for Visual Studio Marketplace presentation.
+
 ## [1.3.4] - 2026-06-25
 
 ### Fixed
