@@ -2,7 +2,7 @@
   "name": "pactia",
   "displayName": "Pactia",
   "description": "Syntax highlighting for Pactia contract files (.pactia)",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "publisher": "pactia-lang",
   "license": "MIT",
   "icon": "images/icon.png",
