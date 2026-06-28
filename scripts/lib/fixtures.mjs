@@ -29,11 +29,12 @@ const fixtureCandidates = [
     ],
   },
   {
-    id: "single-file",
-    paths: [
-      "testdata/fixtures/single-file/fleet-management-v2.pactia",
-      "../examples/single-file/fleet-management-v2.pactia",
-    ],
+    id: "edge-malformed",
+    paths: ["testdata/fixtures/edge-cases/malformed-syntax.pactia"],
+  },
+  {
+    id: "edge-deep-nest",
+    paths: ["testdata/fixtures/edge-cases/deeply-nested.pactia"],
   },
 ];
 

@@ -1,0 +1,63 @@
+// Deeply nested structure — stress-tests stack depth handling
+
+pactia 1.0
+
+import @pactia/kernel;
+import @pactia/rust-stack;
+
+product DeepNest {
+  > Deep nesting beyond typical depth tests stack handling.
+
+  #rust-stack
+
+  module core {
+    model {
+      @entity Root {
+        @@pk
+        id: uuid,
+        name: string,
+      }
+
+      @entity Deep {
+        @@pk
+        id: uuid,
+        @config deep_field {
+          @policy retention_policy {
+            region: "eu-west-1",
+            period: "90d",
+            reason: "compliance",
+            @rule nested_deep {
+              level: strict,
+              @audit audit_trail {
+                enabled: true,
+                retention: "365d",
+              },
+            },
+          },
+        },
+      }
+    }
+
+    service DeepService {
+      #database
+      > API with deeply nested tags
+
+      @auth { roles: [Admin] }
+
+      @@output DeepResponse
+      @api deep_operation {
+        method: POST,
+        path: "/api/v1/deep",
+
+        @surface deep_ui {
+          platform: web,
+          screen: { id: deep_screen },
+          route: { path: "/deep" },
+          @guide deep_surface_guide {
+            > Operations team UI for deep nested configuration.
+          },
+        },
+      }
+    }
+  }
+}

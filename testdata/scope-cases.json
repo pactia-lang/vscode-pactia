@@ -474,6 +474,140 @@
       "line": "  def api_docs = context api_notes {",
       "token": "api_notes",
       "include": ["entity.name.context.pactia"]
+    },
+    {
+      "id": "multiline-prose-marker",
+      "line": "  >> Multi line prose block >>",
+      "token": ">>",
+      "include": ["punctuation.definition.prose.quote.pactia"]
+    },
+    {
+      "id": "multiline-prose-marker-end",
+      "line": "  >> Multi line prose block >>",
+      "token": ">>",
+      "include": ["punctuation.definition.prose.quote.pactia"]
+    },
+    {
+      "id": "export-def-constant",
+      "line": "export def max_page = 100",
+      "token": "def",
+      "include": ["keyword.declaration.pactia"]
+    },
+    {
+      "id": "export-def-constant-name",
+      "line": "export def max_page = 100",
+      "token": "max_page",
+      "include": ["variable.other.constant.pactia"]
+    },
+    {
+      "id": "export-def-constant-value",
+      "line": "export def max_page = 100",
+      "token": "100",
+      "include": ["constant.numeric.pactia"]
+    },
+    {
+      "id": "export-def-constant-prose",
+      "line": "export def checkout_policy = > Idempotent creates.",
+      "token": "checkout_policy",
+      "include": ["variable.other.constant.pactia"]
+    },
+    {
+      "id": "nested-host-tag",
+      "line": "      @surface order_list {",
+      "token": "surface",
+      "include": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "nested-host-tag-target",
+      "line": "      @surface order_list {",
+      "token": "order_list",
+      "include": ["entity.name.tag.target.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "nested-environment-tag",
+      "line": "      @environment staging {",
+      "token": "staging",
+      "include": ["entity.name.tag.target.pactia"],
+      "exclude": ["entity.name.tag.clause.pactia"]
+    },
+    {
+      "id": "keyword-mode",
+      "line": "    mode: microservices,",
+      "token": "mode",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "keyword-coverage",
+      "line": "        coverage: \">= 80%\",",
+      "token": "coverage",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "array-values",
+      "line": "    values: [PENDING, FULFILLED],",
+      "token": "PENDING",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "emit-event-dotted-name",
+      "line": "      @emit vehicle.created",
+      "token": "vehicle.created",
+      "include": ["variable.other.event.pactia"]
+    },
+    {
+      "id": "host-tag-prefix-parens",
+      "line": "      @auth(Admin)",
+      "token": "Admin",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "def-param-macro",
+      "line": "export def #cursor_paginated(arg1) in service, model {",
+      "token": "cursor_paginated",
+      "include": ["entity.name.function.macro.pactia"]
+    },
+    {
+      "id": "def-in-multi-placement",
+      "line": "export def #paginated(arg1) in service, model {",
+      "token": "service, model",
+      "include": ["constant.language.placement.pactia"]
+    },
+    {
+      "id": "modifier-tag-inline-shorthand",
+      "line": "      @@output(OrderListResponse)",
+      "token": "output",
+      "include": ["entity.name.tag.modifier.pactia"]
+    },
+    {
+      "id": "modifier-tag-inline-shorthand-arg",
+      "line": "      @@output(OrderListResponse)",
+      "token": "OrderListResponse",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "entity-type-array",
+      "line": "        orders: OrderListItem[],",
+      "token": "OrderListItem",
+      "include": ["entity.name.type.pactia"]
+    },
+    {
+      "id": "keyword-capabilities",
+      "line": "      capabilities: [manage_orders],",
+      "token": "capabilities",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "context-path-array",
+      "line": "    path: [\"./a.md\", \"./b.png\"],",
+      "token": "path",
+      "include": ["keyword.other.assignment.pactia"]
+    },
+    {
+      "id": "context-path-dir",
+      "line": "    path: \"./pack/\",",
+      "token": "path",
+      "include": ["keyword.other.assignment.pactia"]
     }
   ]
 }

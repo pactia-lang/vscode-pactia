@@ -1,0 +1,43 @@
+// Worst-case boundary test fixture — malformed but should tokenize without crashing
+// Grammar must be resilient: recover gracefully from bad input
+
+import @pactia/kernel;
+
+product MalformedTest {
+  > This file contains syntax errors — tokenization must not panic or infinite-loop.
+
+  // Missing closing brace on tag
+  @topology {
+    mode: broken,
+
+  // Unclosed block
+  @actor orphans {
+    role: Ghost,
+    capabilities: [haunt],
+
+  // Macro with missing parens
+  #broken_macro(args
+
+  // Double sigil error
+  @@output
+  @@input(MissingType
+
+  // Dangling prose
+  > Unclosed prose without newline
+
+  // Nested braces mismatch
+  @entity Broken {
+    id: uuid,
+  }
+
+  // Valid stuff mixed in — should still highlight
+  @auth { roles: [Operator] }
+
+  #valid_macro
+
+  @@output GoodResponse
+  @api working_endpoint {
+    method: GET,
+    path: "/api/v1/works",
+  }
+}
