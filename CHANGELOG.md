@@ -6,6 +6,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-06-28
+
 ### Added
 
 - **Edge-case test fixtures:** `malformed-syntax.pactia` (unbalanced braces, broken macros, bad sigils) and `deeply-nested.pactia` (9-level tag nesting) to verify grammar resilience on best-case and worst-case inputs.
@@ -19,6 +21,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 - **Removed duplicate fixture** — `testdata/fixtures/single-file/` was identical to `testdata/fixtures/kernel/`; tests now run on 6 distinct fixtures.
 - **Context fixture corrections** — `pactia 1.2` → `pactia 1.0` (source files declare `pactia 1.0` per spec); added missing commas on `path:` fields.
+- **GitHub Releases CI** — tags matching `v*` automatically build the `.vsix` and create a GitHub Release with the artifact attached. No secrets needed.
 
 ## [1.4.0] - 2026-06-27
 
@@ -102,7 +105,8 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 - Nine kernel keywords, clause tags, macros, registry authoring blocks, package imports.
 - CI test suite: extension manifest, scope cases, fixture scans, markdown injection.
 
-[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/pactia-lang/vscode-pactia/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/pactia-lang/vscode-pactia/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.4...v1.4.0
 [1.3.4]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.3...v1.3.4
 [1.3.3]: https://github.com/pactia-lang/vscode-pactia/compare/v1.3.2...v1.3.3
