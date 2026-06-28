@@ -294,39 +294,43 @@
     "module-constants": {
       "patterns": [
         {
-          "match": "^(\\s*)(def)\\s+([\\w]+)\\s*(=)\\s*(>\\s*)(.+)$",
+          "match": "^(\\s*)((?:export)\\s+)?(def)\\s+([\\w]+)\\s*(=)\\s*(>\\s*)(.+)$",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
-            "3": { "name": "variable.other.constant.pactia" },
-            "4": { "name": "keyword.operator.assignment.pactia" },
-            "5": { "name": "punctuation.definition.prose.quote.pactia punctuation.definition.blockquote" },
-            "6": { "name": "string.unquoted.prose.pactia string.quoted.other markup.italic" }
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "variable.other.constant.pactia" },
+            "5": { "name": "keyword.operator.assignment.pactia" },
+            "6": { "name": "punctuation.definition.prose.quote.pactia punctuation.definition.blockquote" },
+            "7": { "name": "string.unquoted.prose.pactia string.quoted.other markup.italic" }
           }
         },
         {
-          "match": "^(\\s*)(def)\\s+([\\w]+)\\s*(=)\\s*(\"(?:[^\"\\\\]|\\\\.)*\")\\s*$",
+          "match": "^(\\s*)((?:export)\\s+)?(def)\\s+([\\w]+)\\s*(=)\\s*(\"(?:[^\"\\\\]|\\\\.)*\")\\s*$",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
-            "3": { "name": "variable.other.constant.pactia" },
-            "4": { "name": "keyword.operator.assignment.pactia" },
-            "5": { "name": "string.quoted.double.pactia" }
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "variable.other.constant.pactia" },
+            "5": { "name": "keyword.operator.assignment.pactia" },
+            "6": { "name": "string.quoted.double.pactia" }
           }
         },
         {
-          "match": "^(\\s*)(def)\\s+([\\w]+)\\s*(=)\\s*(-?\\d+(?:\\.\\d+)?)\\s*$",
+          "match": "^(\\s*)((?:export)\\s+)?(def)\\s+([\\w]+)\\s*(=)\\s*(-?\\d+(?:\\.\\d+)?)\\s*$",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
-            "3": { "name": "variable.other.constant.pactia" },
-            "4": { "name": "keyword.operator.assignment.pactia" },
-            "5": { "name": "constant.numeric.pactia" }
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "variable.other.constant.pactia" },
+            "5": { "name": "keyword.operator.assignment.pactia" },
+            "6": { "name": "constant.numeric.pactia" }
           }
         },
         {
-          "match": "^(\\s*)(def)\\s+([\\w]+)\\s*(=)",
+          "match": "^(\\s*)((?:export)\\s+)?(def)\\s+([\\w]+)\\s*(=)",
           "captures": {
             "2": { "name": "keyword.declaration.pactia" },
-            "3": { "name": "variable.other.constant.pactia" },
-            "4": { "name": "keyword.operator.assignment.pactia" }
+            "3": { "name": "keyword.declaration.pactia" },
+            "4": { "name": "variable.other.constant.pactia" },
+            "5": { "name": "keyword.operator.assignment.pactia" }
           }
         }
       ]

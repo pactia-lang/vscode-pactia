@@ -53,6 +53,12 @@ const requiredScopesPerFile = {
     "support.type.primitive.pactia",
     "meta.object.key.pactia",
   ],
+  edge: [
+    "keyword.declaration.pactia",
+    "entity.name.tag.clause.pactia",
+    "comment.line.double-slash.pactia",
+    "string.unquoted.prose.pactia",
+  ],
 };
 
 const clauseTagLine =
@@ -72,6 +78,12 @@ function fixtureKind(fixtureId) {
   }
   if (fixtureId === "fragment") {
     return "fragment";
+  }
+  if (fixtureId === "edge-malformed") {
+    return "edge";
+  }
+  if (fixtureId === "edge-deep-nest") {
+    return "edge";
   }
   return "kernel";
 }
@@ -187,7 +199,7 @@ export async function runFixtureTests() {
       `${rel}: ${result.lineCount} lines, max depth ${result.maxDepth}, final depth ${result.finalDepth}`,
     );
 
-    if (result.finalDepth !== 1) {
+    if (kind !== "edge" && result.finalDepth !== 1) {
       console.error(
         `FAIL: ${rel} — expected final stack depth 1, got ${result.finalDepth}`,
       );
@@ -206,6 +218,10 @@ export async function runFixtureTests() {
         console.error(`FAIL: ${rel} — missing scope ${requiredScope}`);
         failed += 1;
       }
+    }
+
+    if (kind === "edge") {
+      continue;
     }
 
     for (const { lineNumber, line } of result.lineResults) {

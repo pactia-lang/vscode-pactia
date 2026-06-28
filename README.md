@@ -139,7 +139,7 @@ product Relay {
 ```bash
 npm install
 npm test                 # full suite: extension, scopes, fixtures, markdown
-npm run test:scopes      # 78 declarative scope contract cases
+npm run test:scopes      # 100 declarative scope contract cases
 npm run test:fixtures    # fixture balance + scope scan
 npm run test:markdown     # ```pactia fence injection
 npm run package           # pactia-<version>.vsix
