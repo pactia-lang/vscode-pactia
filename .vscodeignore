@@ -3,5 +3,6 @@
 !language-configuration.json
 !syntaxes/**
 !images/**
+!out/**
 !README.md
 !LICENSE
