@@ -6,7 +6,10 @@
   "publisher": "pactia-lang",
   "license": "MIT",
   "icon": "images/icon.png",
+  "main": "./out/extension.js",
   "scripts": {
+    "vscode:prepublish": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "test:extension": "node scripts/test-extension.mjs",
     "test:scopes": "node scripts/test-scopes.mjs",
     "test:fixtures": "node scripts/test-fixtures.mjs",
@@ -17,6 +20,8 @@
     "install:extension": "./scripts/install-extension.sh"
   },
   "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0",
     "vscode-oniguruma": "^2.0.1",
     "vscode-textmate": "^9.1.0"
   },
@@ -24,6 +29,9 @@
     "vscode": "^1.85.0",
     "node": ">=20"
   },
+  "activationEvents": [
+    "onLanguage:pactia"
+  ],
   "categories": [
     "Programming Languages"
   ],
